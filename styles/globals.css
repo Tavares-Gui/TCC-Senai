@@ -11,16 +11,8 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: darkgray;
 }
