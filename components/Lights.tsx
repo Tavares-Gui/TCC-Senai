@@ -10,7 +10,7 @@ const Lights: React.FC = () => {
 
     return (
         <>
-            <ambientLight intensity={0.2} />
+            <ambientLight intensity={1} />
             <directionalLight
                 ref={lightRef}
                 position={[0, 10, 10]}
