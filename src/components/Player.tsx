@@ -38,8 +38,10 @@ const directionOffset = ({ forward, backward, left, right }) => {
 
 const Player = () => {
     const { forward, backward, left, right, shift } = useInput();
-    const { scene, animations } = useGLTF("./models/myplayer.glb")
+    const { scene, animations } = useGLTF("./models/untitled.glb")
     const { actions } = useAnimations(animations, scene)
+
+    console.log(scene);
 
     scene.traverse((objeto) => {
         if (objeto.isMesh) {
