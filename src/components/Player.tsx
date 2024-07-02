@@ -16,29 +16,31 @@ const directionOffset = ({ forward, backward, left, right }) => {
         if (left) {
             directionOffset = Math.PI / 4;
         } else if (right) {
-            directionOffset = -Math.PI / 4
+            directionOffset = -Math.PI / 4;
+        } else {
+            directionOffset = 0;
         }
     } else if (backward) {
         if (left) {
-            directionOffset = Math.PI / 4 + Math.PI / 2;
+            directionOffset = 3 * Math.PI / 4;
         } else if (right) {
-            directionOffset = -Math.PI / 4 + Math.PI / 2;
+            directionOffset = -3 * Math.PI / 4;
         } else {
-            directionOffset = Math.PI
+            directionOffset = Math.PI;
         }
     } else if (left) {
         directionOffset = Math.PI / 2;
     } else if (right) {
         directionOffset = -Math.PI / 2;
     }
-
+    
     return directionOffset;
 }
 
 
 const Player = () => {
     const { forward, backward, left, right, shift } = useInput();
-    const { scene, animations } = useGLTF("./models/untitled.glb")
+    const { scene, animations } = useGLTF("./models/ROBERTO.glb")
     const { actions } = useAnimations(animations, scene)
 
     console.log(scene);
@@ -110,7 +112,7 @@ const Player = () => {
                 angleYCameraDirection + newDirectionOffset
             );
             scene.quaternion.rotateTowards(rotateQuarternion, 0.2);
-            
+
             camera.getWorldDirection(walkDirection);
             walkDirection.y = 0;
             walkDirection.normalize();
@@ -129,7 +131,7 @@ const Player = () => {
     return (
         <>
             <OrbitControls ref={controlsRef} />
-            <primitive object={scene} scale={[0.5, 0.5, 0.5]} position={[0, 1.2, 0]} />
+            <primitive object={scene} scale={[0.5, 0.5, 0.5]} position={[0, 0, 0]} />
         </>
     );
 }
