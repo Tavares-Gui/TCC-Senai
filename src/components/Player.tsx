@@ -33,13 +33,13 @@ const directionOffset = ({ forward, backward, left, right }) => {
     } else if (right) {
         directionOffset = -Math.PI / 2;
     }
-    
+
     return directionOffset;
 }
 
 
 const Player = () => {
-    const { forward, backward, left, right, shift } = useInput();
+    const { forward, backward, left, right, shift, jump } = useInput();
     const { scene, animations } = useGLTF("./models/ROBERTO.glb")
     const { actions } = useAnimations(animations, scene)
 
@@ -65,6 +65,7 @@ const Player = () => {
 
         if (controlsRef.current) controlsRef.current.target = cameraTarget;
 
+        camera.lookAt(cameraTarget);
     }
 
     useEffect(() => {
@@ -74,6 +75,8 @@ const Player = () => {
             if (shift) {
                 action = "running"
             }
+        } else if (jump) {
+            action = "jump"
         } else {
             action = "idle"
         }
@@ -91,7 +94,7 @@ const Player = () => {
             currentAction.current = action;
         }
 
-    }, [forward, backward, left, right, shift])
+    }, [forward, backward, left, right, shift, jump])
 
     useFrame((state, delta) => {
         if (currentAction.current == "running" || currentAction.current == "walking") {
@@ -131,7 +134,7 @@ const Player = () => {
     return (
         <>
             <OrbitControls ref={controlsRef} />
-            <primitive object={scene} scale={[0.5, 0.5, 0.5]} position={[0, 0, 0]} />
+            <primitive object={scene} scale={[1, 1, 1]} position={[0, 0, 0]} />
         </>
     );
 }

@@ -6,7 +6,8 @@ export const useInput = () => {
         backward: false,
         left: false,
         right: false,
-        shift: false
+        shift: false,
+        jump: false
     });
 
     const keys = {
@@ -14,7 +15,8 @@ export const useInput = () => {
         KeyS: "backward",
         KeyA: "left",
         KeyD: "right",
-        ShiftLeft: "shift"
+        ShiftLeft: "shift",
+        Space: "jump"
     }
 
     const findKey = (key: string) => keys[key];
