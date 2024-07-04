@@ -1,19 +1,24 @@
 import { useHelper } from "@react-three/drei";
 import { useRef } from "react";
-import { DirectionalLight, DirectionalLightHelper } from "three";
+import { DirectionalLight, DirectionalLightHelper, HemisphereLight } from "three";
 
-const Lights: React.FC = () => {
+interface LightsProps {
+    x: number;
+    y: number;
+    z: number;
+}
 
-    const lightRef = useRef<THREE.DirectionalLight>();
+const Lights: React.FC<LightsProps> = ({ x, y, z }) => {
+
+    const lightRef = useRef<DirectionalLight>();
 
     useHelper(lightRef, DirectionalLightHelper, 5, "red");
 
     return (
         <>
-            <ambientLight intensity={1} />
             <directionalLight
                 ref={lightRef}
-                position={[0, 10, 10]}
+                position={[x, y, z]}
                 castShadow
                 shadow-mapSize-height={1000}
                 shadow-mapSize-width={1000}

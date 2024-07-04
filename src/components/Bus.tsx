@@ -10,7 +10,7 @@ const Bus = () => {
     })  
     return (
         <object3D rotation={[0,1.55,0]}>
-            <primitive position={[2, 0, 10]} object={model.scene} />
+            <primitive position={[4, 0, 2]} object={model.scene} />
         </object3D>
     );
 }

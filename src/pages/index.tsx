@@ -19,7 +19,9 @@ const Home: NextPage = () => {
         {/* <OrbitControls /> */}
         <Bus />
         <Warehouse />
-        <Lights />
+        <ambientLight intensity={1} />
+        <Lights x={0} y={10} z={10}/>
+        <Lights x={0} y={10} z={-50}/>
         <Player />
         <Ground />
       </Canvas>
