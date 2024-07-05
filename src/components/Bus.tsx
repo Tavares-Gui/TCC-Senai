@@ -1,19 +1,14 @@
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useBox } from "@react-three/cannon";
-import { Box3, Vector3 } from "three";
 
-const Bus = () => {
+const Bus: React.FC = () => {
     const model = useLoader(GLTFLoader, './models/bus.glb');
-
-    const box = new Box3().setFromObject(model.scene);
-    const size = new Vector3();
-    box.getSize(size);
-
     const [ref] = useBox(() => ({
         mass: 1,
-        position: [0, 0, 0],
-        args: [size.x, size.y, size.z] 
+        args: [0, 0, 0],
+        position: [2, 0, 4],
+        rotation: [0, Math.PI / 2, 0]
     }));
 
     model.scene.traverse((objeto) => {
@@ -23,10 +18,9 @@ const Bus = () => {
     });
 
     return (
-        <mesh ref={ref}>
-            {console.log(ref)}
-            <primitive object={model.scene} ref={ref}/>
-        </mesh>
+        <group ref={ref}>
+            <primitive object={model.scene} />
+        </group>
     );
 }
 
