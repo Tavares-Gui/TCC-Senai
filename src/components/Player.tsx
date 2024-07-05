@@ -99,7 +99,7 @@ const Player = () => {
     useFrame((state, delta) => {
         if (currentAction.current == "running" || currentAction.current == "walking") {
             let angleYCameraDirection = Math.atan2(
-                camera.position.x - scene.position.x,
+                camera. position.x - scene.position.x,
                 camera.position.z - scene.position.z
             );
 
@@ -133,8 +133,8 @@ const Player = () => {
 
     return (
         <>
-            <OrbitControls ref={controlsRef} />
-            <primitive object={scene} scale={[1, 1, 1]} position={[0, 0, 0]} />
+            <OrbitControls ref={controlsRef}/>
+            <primitive object={scene} scale={[1, 1, 1]} />
         </>
     );
 }
