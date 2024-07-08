@@ -3,11 +3,12 @@ import { useEffect, useRef } from 'react';
 import { useInput } from '../hooks/useInput';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from "three"
+import { useBox } from '@react-three/cannon';
 
 let walkDirection = new THREE.Vector3();
-let rotateAngle = new THREE.Vector3(0, 1, 0)
-let rotateQuarternion = new THREE.Quaternion()
-let cameraTarget = new THREE.Vector3()
+let rotateAngle = new THREE.Vector3(0, 1, 0);
+let rotateQuaternion = new THREE.Quaternion();
+let cameraTarget = new THREE.Vector3();
 
 const directionOffset = ({ forward, backward, left, right }) => {
     var directionOffset = 0;
@@ -37,36 +38,26 @@ const directionOffset = ({ forward, backward, left, right }) => {
     return directionOffset;
 }
 
-
 const Player = () => {
     const { forward, backward, left, right, shift, jump } = useInput();
-    const { scene, animations } = useGLTF("./models/ROBERTO.glb")
-    const { actions } = useAnimations(animations, scene)
-
-    console.log(scene);
+    const { scene, animations } = useGLTF("./models/ROBERTO.glb");
+    const { actions } = useAnimations(animations, scene);
 
     scene.traverse((objeto) => {
         if (objeto.isMesh) {
             objeto.castShadow = true;
         }
-    })
+    });
 
     const currentAction = useRef("");
     const controlsRef = useRef<typeof OrbitControls>();
-    const camera = useThree((state) => state.camera)
+    const camera = useThree((state) => state.camera);
 
-    const updateCameraTarget = (moveX: number, moveZ: number) => {
-        camera.position.x += moveX;
-        camera.position.z += moveZ;
-
-        cameraTarget.x = scene.position.x;
-        cameraTarget.y = scene.position.y + 2;
-        cameraTarget.z = scene.position.z;
-
-        if (controlsRef.current) controlsRef.current.target = cameraTarget;
-
-        camera.lookAt(cameraTarget);
-    }
+    const [ref, api] = useBox(() => ({
+        mass: 1,
+        args: [1, 2, 1],
+        position: [0, 1, 0],
+    }));
 
     useEffect(() => {
         let action = "";
@@ -81,12 +72,7 @@ const Player = () => {
             action = "idle"
         }
 
-        console.log('---')
-        console.log(currentAction.current)
-        console.log(action)
-        console.log('---')
-
-        if (currentAction.current != action) {
+        if (currentAction.current !== action) {
             const nextActionToPlay = actions[action];
             const current = actions[currentAction.current];
             current?.fadeOut(0.2);
@@ -94,12 +80,25 @@ const Player = () => {
             currentAction.current = action;
         }
 
-    }, [forward, backward, left, right, shift, jump])
+    }, [forward, backward, left, right, shift, jump]);
+
+    const updateCameraTarget = (moveX, moveZ) => {
+        camera.position.x += moveX;
+        camera.position.z += moveZ;
+
+        cameraTarget.x = scene.position.x;
+        cameraTarget.y = scene.position.y + 2;
+        cameraTarget.z = scene.position.z;
+
+        if (controlsRef.current) controlsRef.current.target = cameraTarget;
+
+        camera.lookAt(cameraTarget);
+    }
 
     useFrame((state, delta) => {
-        if (currentAction.current == "running" || currentAction.current == "walking") {
+        if (currentAction.current === "running" || currentAction.current === "walking") {
             let angleYCameraDirection = Math.atan2(
-                camera. position.x - scene.position.x,
+                camera.position.x - scene.position.x,
                 camera.position.z - scene.position.z
             );
 
@@ -110,31 +109,33 @@ const Player = () => {
                 right
             });
 
-            rotateQuarternion.setFromAxisAngle(
+            rotateQuaternion.setFromAxisAngle(
                 rotateAngle,
                 angleYCameraDirection + newDirectionOffset
             );
-            scene.quaternion.rotateTowards(rotateQuarternion, 0.2);
+            scene.quaternion.rotateTowards(rotateQuaternion, 0.2);
 
             camera.getWorldDirection(walkDirection);
             walkDirection.y = 0;
             walkDirection.normalize();
             walkDirection.applyAxisAngle(rotateAngle, newDirectionOffset);
 
-            const velocity = currentAction.current == "running" ? 10 : 5;
+            const velocity = currentAction.current === "running" ? 10 : 5;
 
             const moveX = walkDirection.x * velocity * delta;
             const moveZ = walkDirection.z * velocity * delta;
+
             scene.position.x += moveX;
             scene.position.z += moveZ;
+            api.position.copy(scene.position);
             updateCameraTarget(moveX, moveZ);
         }
-    })
+    });
 
     return (
         <>
-            <OrbitControls ref={controlsRef}/>
-            <primitive object={scene} scale={[1, 1, 1]} />
+            <OrbitControls ref={controlsRef} />
+            <primitive object={scene} scale={[1, 1, 1]} position={[0, 1, 0]} />
         </>
     );
 }
