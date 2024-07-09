@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useBox } from "@react-three/cannon";
+import * as THREE from "three";
 
-const Bus: React.FC = () => {
+const Bus = forwardRef((props, ref) => {
     const busModel = useLoader(GLTFLoader, './models/bus.glb');
+    const busRef = useRef(null);
+    const boundingBoxRef = useRef(new THREE.Box3());
 
     useEffect(() => {
         if (busModel) {
@@ -15,22 +17,18 @@ const Bus: React.FC = () => {
                     objeto.castShadow = true;
                 }
             });
+
+            boundingBoxRef.current.setFromObject(busModel.scene);
         }
     }, [busModel]);
 
-    const [coverRef] = useBox(() => ({
-        mass: 0,
-        args: [3, 3.85, 13.39],
-        position: [0, 2, 4],
-        rotation: [0, Math.PI / 2, 0]
+    useImperativeHandle(ref, () => ({
+        getBoundingBox: () => boundingBoxRef.current
     }));
 
     return (
-        <group>
-            <primitive object={busModel.scene} />
-            <mesh ref={coverRef} receiveShadow />
-        </group>
+        <primitive object={busModel.scene} />
     );
-}
+});
 
 export default Bus;

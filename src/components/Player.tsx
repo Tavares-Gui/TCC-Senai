@@ -2,8 +2,7 @@ import { OrbitControls, useAnimations, useGLTF } from '@react-three/drei';
 import { useEffect, useRef } from 'react';
 import { useInput } from '../hooks/useInput';
 import { useFrame, useThree } from '@react-three/fiber';
-import * as THREE from "three"
-import { useBox } from '@react-three/cannon';
+import * as THREE from "three";
 
 let walkDirection = new THREE.Vector3();
 let rotateAngle = new THREE.Vector3(0, 1, 0);
@@ -38,7 +37,7 @@ const directionOffset = ({ forward, backward, left, right }) => {
     return directionOffset;
 }
 
-const Player = () => {
+const Player = ({ collidableObjects = [] }) => {
     const { forward, backward, left, right, shift, jump } = useInput();
     const { scene, animations } = useGLTF("./models/ROBERTO.glb");
     const { actions } = useAnimations(animations, scene);
@@ -49,15 +48,11 @@ const Player = () => {
         }
     });
 
-    const currentAction = useRef("");
-    const controlsRef = useRef<typeof OrbitControls>();
-    const camera = useThree((state) => state.camera);
+    const playerBoundingBox = new THREE.Box3().setFromObject(scene);
 
-    const [ref, api] = useBox(() => ({
-        mass: 1,
-        args: [1, 2, 1],
-        position: [0, 1, 0],
-    }));
+    const currentAction = useRef("");
+    const controlsRef = useRef(null);
+    const camera = useThree((state) => state.camera);
 
     useEffect(() => {
         let action = "";
@@ -127,15 +122,29 @@ const Player = () => {
 
             scene.position.x += moveX;
             scene.position.z += moveZ;
-            api.position.copy(scene.position);
-            updateCameraTarget(moveX, moveZ);
+            playerBoundingBox.setFromObject(scene);
+
+            let collision = false;
+            for (let i = 0; i < collidableObjects.length; i++) {
+                const objectBoundingBox = collidableObjects[i];
+                if (playerBoundingBox.intersectsBox(objectBoundingBox)) {
+                    scene.position.x -= moveX;
+                    scene.position.z -= moveZ;
+                    collision = true;
+                    break;
+                }
+            }
+
+            if (!collision) {
+                updateCameraTarget(moveX, moveZ);
+            }
         }
     });
 
     return (
         <>
-            <OrbitControls ref={controlsRef} />
-            <primitive object={scene} scale={[1, 1, 1]} position={[0, 1, 0]} />
+            <OrbitControls ref={controlsRef} enableZoom={false} enablePan={false} />
+            <primitive object={scene} scale={[1, 1, 1]} position={[0, 0, 0]} />
         </>
     );
 }

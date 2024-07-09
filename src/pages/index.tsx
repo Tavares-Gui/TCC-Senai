@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import React, { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Stats } from '@react-three/drei';
 import { Physics, Debug } from '@react-three/cannon';
@@ -8,8 +8,22 @@ import Player from '../components/Player';
 import Warehouse from '../components/Warehouse';
 import Plane from '../components/Plane';
 
-const Home: NextPage = () => {
+const Home = () => {
   const conVisible = true;
+  const busRef = useRef();
+  const [collidableObjects, setCollidableObjects] = useState([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (busRef.current) {
+        const busBoundingBox = busRef.current.getBoundingBox();
+        setCollidableObjects([busBoundingBox]);
+        clearInterval(interval);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="container">
@@ -22,9 +36,9 @@ const Home: NextPage = () => {
           <Debug>
             <Plane />
             <Warehouse />
-            <Bus /> 
+            <Bus ref={busRef} />
             <Lights x={0} y={10} z={10} />
-            <Player />
+            <Player collidableObjects={collidableObjects} />
           </Debug>
         </Physics>
       </Canvas>
