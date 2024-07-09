@@ -5,7 +5,6 @@ import * as THREE from "three";
 
 const Bus = forwardRef((props, ref) => {
     const busModel = useLoader(GLTFLoader, './models/bus.glb');
-    const busRef = useRef(null);
     const boundingBoxRef = useRef(new THREE.Box3());
 
     useEffect(() => {

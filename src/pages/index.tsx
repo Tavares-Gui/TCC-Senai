@@ -33,13 +33,11 @@ const Home = () => {
         {/* {conVisible ? <gridHelper args={[10, 10]} /> : null} */}
         <ambientLight intensity={1} />
         <Physics>
-          <Debug>
             <Plane />
             <Warehouse />
             <Bus ref={busRef} />
             <Lights x={0} y={10} z={10} />
             <Player collidableObjects={collidableObjects} />
-          </Debug>
         </Physics>
       </Canvas>
     </div>
