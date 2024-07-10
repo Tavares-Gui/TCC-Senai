@@ -8,6 +8,7 @@ import Player from '../components/Player';
 import Warehouse from '../components/Warehouse';
 import Plane from '../components/Plane';
 import * as THREE from "three";
+import LightBulb from '../components/LightBulb';
 
 interface BusRef {
   getBoundingBox: () => THREE.Box3;
@@ -40,6 +41,7 @@ const Home = () => {
         <Physics>
             <Plane />
             <Warehouse />
+            <LightBulb />
             <Bus ref={busRef} />
             <Lights x={0} y={10} z={10} />
             <Player collidableObjects={collidableObjects} />

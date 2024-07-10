@@ -152,7 +152,7 @@ const Player: React.FC<PlayerProps> = ({ collidableObjects = [] }) => {
 
     return (
         <>
-            <OrbitControls ref={controlsRef} enableZoom={false} enablePan={false} />
+            <OrbitControls ref={controlsRef} enableZoom={true} enablePan={true} />
             <primitive object={scene} scale={[1, 1, 1]} position={[0, 0, 0]} />
         </>
     );
