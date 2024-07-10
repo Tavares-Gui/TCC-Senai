@@ -1,17 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Stats } from '@react-three/drei';
-import { Physics, Debug } from '@react-three/cannon';
+import { Physics } from '@react-three/cannon';
 import Lights from '../components/Lights';
 import Bus from '../components/Bus';
 import Player from '../components/Player';
 import Warehouse from '../components/Warehouse';
 import Plane from '../components/Plane';
+import * as THREE from "three";
+
+interface BusRef {
+  getBoundingBox: () => THREE.Box3;
+}
 
 const Home = () => {
   const conVisible = true;
-  const busRef = useRef();
-  const [collidableObjects, setCollidableObjects] = useState([]);
+  const busRef = useRef<BusRef>(null);
+  const [collidableObjects, setCollidableObjects] = useState<THREE.Box3[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {

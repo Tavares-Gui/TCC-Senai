@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react";
 
 export const useInput = () => {
     const [input, setInput] = useState({
@@ -10,32 +10,37 @@ export const useInput = () => {
         jump: false
     });
 
-    const keys = {
+    const keys: { [key: string]: string } = {
         KeyW: "forward",
         KeyS: "backward",
         KeyA: "left",
         KeyD: "right",
         ShiftLeft: "shift",
         Space: "jump"
-    }
+    };
 
-    const findKey = (key: string) => keys[key];
+    const findKey = useCallback((key: string) => keys[key], [keys]);
 
     useEffect(() => {
-        const handleKeyDown = (e) => {
-            setInput((m) => ({...m, [findKey(e.code)] : true}))
+        const handleKeyDown = (e: KeyboardEvent) => {
+            const key = findKey(e.code);
+            if (key) {
+                setInput((m) => ({ ...m, [key]: true }));
+            }
         };
-        const handleKeyUp = (e) => {
-            setInput((m) => ({...m, [findKey(e.code)] : false}))
+        const handleKeyUp = (e: KeyboardEvent) => {
+            const key = findKey(e.code);
+            if (key) {
+                setInput((m) => ({ ...m, [key]: false }));
+            }
         };
         document.addEventListener("keydown", handleKeyDown);
         document.addEventListener("keyup", handleKeyUp);
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
             document.removeEventListener("keyup", handleKeyUp);
-        }
-
-    }, [])
+        };
+    }, [findKey]);
 
     return input;
-}
+};

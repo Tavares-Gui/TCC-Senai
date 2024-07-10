@@ -9,7 +9,18 @@ let rotateAngle = new THREE.Vector3(0, 1, 0);
 let rotateQuaternion = new THREE.Quaternion();
 let cameraTarget = new THREE.Vector3();
 
-const directionOffset = ({ forward, backward, left, right }) => {
+interface DirectionOffsetProps {
+    forward: boolean;
+    backward: boolean;
+    left: boolean;
+    right: boolean;
+}
+
+interface PlayerProps {
+    collidableObjects: THREE.Box3[];
+}
+
+const directionOffset = ({ forward, backward, left, right }: DirectionOffsetProps): number => {
     var directionOffset = 0;
 
     if (forward) {
@@ -37,21 +48,21 @@ const directionOffset = ({ forward, backward, left, right }) => {
     return directionOffset;
 }
 
-const Player = ({ collidableObjects = [] }) => {
+const Player: React.FC<PlayerProps> = ({ collidableObjects = [] }) => {
     const { forward, backward, left, right, shift, jump } = useInput();
     const { scene, animations } = useGLTF("./models/ROBERTO.glb");
     const { actions } = useAnimations(animations, scene);
 
     scene.traverse((objeto) => {
-        if (objeto.isMesh) {
-            objeto.castShadow = true;
+        if ((objeto as THREE.Mesh).isMesh) {
+            (objeto as THREE.Mesh).castShadow = true;
         }
     });
 
     const playerBoundingBox = new THREE.Box3().setFromObject(scene);
 
-    const currentAction = useRef("");
-    const controlsRef = useRef(null);
+    const currentAction = useRef<string>("");
+    const controlsRef = useRef<any>(null);
     const camera = useThree((state) => state.camera);
 
     useEffect(() => {
@@ -75,9 +86,9 @@ const Player = ({ collidableObjects = [] }) => {
             currentAction.current = action;
         }
 
-    }, [forward, backward, left, right, shift, jump]);
+    }, [forward, backward, left, right, shift, jump, actions]);
 
-    const updateCameraTarget = (moveX, moveZ) => {
+    const updateCameraTarget = (moveX: number, moveZ: number) => {
         camera.position.x += moveX;
         camera.position.z += moveZ;
 
@@ -134,19 +145,19 @@ const Player = ({ collidableObjects = [] }) => {
                     break;
                 }
             }
-
-            if (!collision) {
+            if (!collision)
                 updateCameraTarget(moveX, moveZ);
-            }
         }
     });
 
     return (
         <>
-            <OrbitControls ref={controlsRef} enableZoom={true} enablePan={false} />
+            <OrbitControls ref={controlsRef} enableZoom={false} enablePan={false} />
             <primitive object={scene} scale={[1, 1, 1]} position={[0, 0, 0]} />
         </>
     );
 }
+
+Player.displayName = "Player";
 
 export default Player;

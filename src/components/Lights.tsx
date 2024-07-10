@@ -1,5 +1,5 @@
 import { useHelper } from "@react-three/drei";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { DirectionalLight, DirectionalLightHelper, HemisphereLight } from "three";
 
 interface LightsProps {
@@ -9,10 +9,9 @@ interface LightsProps {
 }
 
 const Lights: React.FC<LightsProps> = ({ x, y, z }) => {
+    const lightRef = useRef<DirectionalLight>(null);
 
-    const lightRef = useRef<DirectionalLight>();
-
-    useHelper(lightRef, DirectionalLightHelper, 5, "red");
+    useHelper(lightRef as React.MutableRefObject<DirectionalLight>, DirectionalLightHelper, 5, "red");
 
     return (
         <>
@@ -27,7 +26,7 @@ const Lights: React.FC<LightsProps> = ({ x, y, z }) => {
                 shadow-camera-top={20}
                 shadow-camera-bottom={-20}
             />
-            <hemisphereLight args={["#7cdbe6", "#5e9c49", 0.7]}/>
+            <hemisphereLight args={["#7cdbe6", "#5e9c49", 0.7]} />
         </>
     );
 }

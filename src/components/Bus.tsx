@@ -12,7 +12,7 @@ const Bus = forwardRef((props, ref) => {
             busModel.scene.rotation.set(0, Math.PI / 2, 0);
             busModel.scene.position.set(2, 0, 4);
             busModel.scene.traverse((objeto) => {
-                if (objeto.isMesh) {
+                if (objeto instanceof THREE.Mesh) {
                     objeto.castShadow = true;
                 }
             });
@@ -29,5 +29,7 @@ const Bus = forwardRef((props, ref) => {
         <primitive object={busModel.scene} />
     );
 });
+
+Bus.displayName = "Bus";
 
 export default Bus;
