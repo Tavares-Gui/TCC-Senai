@@ -16,3 +16,52 @@ a {
   height: 100vh;
   background-color: darkgray;
 }
+
+.div3d {
+  background-color: #D8DDE0;
+  width: 40em;
+  height: 45em;
+  /* border-radius: 20px; */
+  box-shadow: -10px 5px 30px rgba(0, 0, 0, .5);
+  transform: skewY(-5deg);
+  transition: .5s;
+  border-radius: 5px;
+
+}
+
+.div3d:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -15px;
+  width: 15px;
+  height: 100%;
+  background-color: #fff;
+  transform-origin: right bottom;
+  transform: skewY(45deg);
+  border-radius: 5px;
+}
+
+.div3d::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background-color: #fff;
+  transform-origin: bottom left;
+  transform: skewX(45deg);
+  border-radius: 5px;
+}
+
+.watermark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: 8em;
+  height: 2em;
+  transform: skewY(-5deg);
+  border-radius: 5px;
+}
