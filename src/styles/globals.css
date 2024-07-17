@@ -19,13 +19,13 @@ a {
 
 .div3d {
   background-color: #D8DDE0;
-  width: 40em;
-  height: 45em;
+  width: 35em;
+  height: 40em;
   /* border-radius: 20px; */
   box-shadow: -10px 5px 30px rgba(0, 0, 0, .5);
   transform: skewY(-5deg);
   transition: .5s;
-  border-radius: 5px;
+  border-radius: 0 0 5px 0;
 
 }
 
@@ -39,10 +39,15 @@ a {
   background-color: #fff;
   transform-origin: right bottom;
   transform: skewY(45deg);
-  border-radius: 5px;
+  border-radius: 0 0 0 5px;
+  border-right: none;
+  border-left: 2px solid rgba(255, 0, 0, 0.5);
+  border-top: none;
+  border-bottom: 2px solid rgba(255, 0, 0, 0.5);
 }
 
-.div3d::after {
+
+.div3d:after {
   content: '';
   position: absolute;
   top: -15px;
@@ -52,16 +57,41 @@ a {
   background-color: #fff;
   transform-origin: bottom left;
   transform: skewX(45deg);
-  border-radius: 5px;
+  border-radius: 0 5px 0 0;
+  border-left: none;
+  border-right: 2px solid rgba(255, 0, 0, 0.5);
+  border-bottom: none;
+  border-top: 2px solid rgba(255, 0, 0, 0.5);
 }
 
 .watermark {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  left: 13em;
+  bottom: 2em;
   background-color: #fff;
   width: 8em;
   height: 2em;
-  transform: skewY(-5deg);
+  transform: skewY(0deg);
   border-radius: 5px;
+  z-index: 1;
+}
+
+.vira {
+  width: 80%;
+  height: 9em;
+  background: #5f6061;
+  margin-left: 4em;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  transform: skewY(0deg);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.vira:hover {
+  transform: skewY(4deg); 
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import About from '../components/About';
-import Watermark from '../components/WaterMaker'
 
 const Overlay = () => {
     return (
@@ -32,8 +31,8 @@ const Overlay = () => {
             </div>
             <div
                 style={{
-                    width: '50%',
-                    height: '20%',
+                    width: '150%',
+                    height: '100%',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -41,9 +40,10 @@ const Overlay = () => {
                     zIndex: 10,
                 }}
             >
-                <Watermark />
+                <About />
             </div>
         </div>
+        
     );
 };
 
