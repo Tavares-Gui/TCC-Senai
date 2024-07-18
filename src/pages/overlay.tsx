@@ -1,5 +1,7 @@
 import React from 'react';
 import About from '../components/About';
+import Controls from '../components/Controls';
+
 
 const Overlay = () => {
     return (
@@ -18,7 +20,7 @@ const Overlay = () => {
         >
             <div
                 style={{
-                    width: '50%',
+                    width: '38%',
                     height: '100%',
                     display: 'flex',
                     justifyContent: 'center',
@@ -31,16 +33,16 @@ const Overlay = () => {
             </div>
             <div
                 style={{
-                    width: '150%',
+                    width: '96%',
                     height: '100%',
                     display: 'flex',
-                    justifyContent: 'center',
+                    justifyContent: 'flex-end',
                     alignItems: 'center',
                     position: 'absolute',
                     zIndex: 10,
                 }}
             >
-                <About />
+                <Controls />
             </div>
         </div>
         

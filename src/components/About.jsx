@@ -1,34 +1,28 @@
 import Image from 'next/image';
 import bosch from '../../public/background/bosch.png';
-import { FaBus } from "react-icons/fa";
+import bus from '../../public/background/bus.png'
 
 const About = () => {
     return (
-        <div className="div3d">
-            <div className="watermark">
+        <div className='div3d'>
+            <div className='watermark'>
                 <Image src={bosch} alt="Bosch Logo" width={90} />
             </div>
-            <div className="vira">
-                <div>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'white', width: '8em', height: '8em', borderRadius: '100%', boxShadow: 'initial', marginLeft: '20px'}}>
-                        <FaBus color='#5f6061' size='4em'/>
+            <div className='vira'>
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    <div className='busForm'>
+                        <Image
+                            src={bus}
+                            style={{ height: '6em', width: '7.5em', position: 'relative', left: '0.2em' }}
+                        />
+                    </div>
+                    <div>
+                        <span>EU SOU O MATEUS</span>
                     </div>
                 </div>
+
             </div>
-            <div style={{ width: '80%', height: '9em', background: '#5f6061', marginLeft: '4em', display: 'flex', alignItems: 'center', borderRadius: '5px', marginBottom: '20px'}}>
-                <div>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'white', width: '8em', height: '8em', borderRadius: '100%', boxShadow: 'initial', marginLeft: '300px'}}>
-                        <FaBus color='#5f6061' size='4em'/>
-                    </div>
-                </div>
-            </div>
-            <div style={{ width: '80%', height: '9em', background: '#5f6061', marginLeft: '4em', display: 'flex', alignItems: 'center', borderRadius: '5px', marginBottom: '20px'}}>
-                <div>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'white', width: '8em', height: '8em', borderRadius: '100%', boxShadow: 'initial', marginLeft: '20px'}}>
-                        <FaBus color='#5f6061' size='4em'/>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     );
 }
