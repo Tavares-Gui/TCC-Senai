@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import bosch from '../../public/background/bosch.png';
 import bus from '../../public/background/bus.png'
+import descubra from '../../public/background/descubra.png'
 
 const About = () => {
     return (
@@ -9,7 +10,7 @@ const About = () => {
                 <Image src={bosch} alt="Bosch Logo" width={90} />
             </div>
             <div className='vira'>
-                <div style={{display: 'flex', alignItems: 'center'}}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div className='busForm'>
                         <Image
                             src={bus}
@@ -17,12 +18,12 @@ const About = () => {
                         />
                     </div>
                     <div>
-                        <span>EU SOU O MATEUS</span>
+                        <Image src={descubra} width={310} style={{ marginLeft: '2px', marginTop: '15px' }} />
                     </div>
                 </div>
 
             </div>
-            
+
         </div>
     );
 }
