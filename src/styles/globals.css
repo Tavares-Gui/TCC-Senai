@@ -25,7 +25,6 @@ a {
   transform: skewY(-5deg);
   transition: .5s;
   border-radius: 0 0 5px 0;
-
 }
 
 .div3d:before {
@@ -44,7 +43,6 @@ a {
   border-top: none;
   border-bottom: 2px solid rgba(255, 0, 0, 0.5);
 }
-
 
 .div3d:after {
   content: '';
@@ -89,6 +87,7 @@ a {
   transform: skewY(0deg);
   margin-bottom: 20px;
   transition: transform 0.3s ease;
+  animation: pulse 3s infinite;
 }
 
 .divControls {
@@ -138,12 +137,25 @@ a {
 .busForm {
   display: flex;
   justify-content: center;
-    align-items: center;
-    background: white;
-    width: 6em;
-    height: 6em;
-    border-radius: 100%;
-    box-shadow: initial;
-    margin-left: 20px;
-    border: 2px #D5DDE0 solid;
+  align-items: center;
+  background: white;
+  width: 6em;
+  height: 6em;
+  border-radius: 100%;
+  box-shadow: initial;
+  margin-left: 20px;
+  border: 2px #D5DDE0 solid;
+}
+
+/* Adicione esta seção para a animação */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
