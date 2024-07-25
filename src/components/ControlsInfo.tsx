@@ -1,57 +1,42 @@
-import Image, { StaticImageData } from 'next/image';
+import Image, { StaticImageData } from "next/image";
 
 interface ControlsInfo {
-    logoImageSrc: StaticImageData;
-    titleImageSrc: StaticImageData;
-    flip: boolean;
+  logoImageSrc: StaticImageData;
+  titleImageSrc: StaticImageData;
+  width: number;
+  height: number;
 }
 
-const ControlsInfo: React.FC<ControlsInfo> = () => {
-    return (
-        <div className='controlsInfo'>
-            {/* <div style={{ display: 'flex', alignItems: 'center' }}>
-                {!flip ? (
-                    <>
-                        <div className='busForm'>
-                            <Image
-                                src={logoImageSrc}
-                                width={120}
-                                height={90}
-                                style={{ position: 'relative', left: '0.2em' }}
-                                alt={''} />
-                        </div>
-                        <div>
-                            <Image
-                                src={titleImageSrc}
-                                width={310}
-                                height={90}
-                                style={{ marginLeft: '2px', marginTop: '15px' }}
-                                alt={''} />
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <div>
-                            <Image
-                                src={titleImageSrc}
-                                width={310}
-                                height={90}
-                                style={{ marginLeft: '10px', marginTop: '15px' }}
-                                alt={''} />
-                        </div>
-                        <div className='busForm' style={{marginLeft: '0px'}}>
-                            <Image
-                                src={logoImageSrc}
-                                width={120}
-                                height={90}
-                                style={{ position: 'relative', left: '0.2em' }}
-                                alt={''} />
-                        </div>
-                    </>
-                )}
-            </div> */}
+const ControlsInfo: React.FC<ControlsInfo> = ({
+  logoImageSrc,
+  titleImageSrc,
+  width,
+  height
+}) => {
+  return (
+    <div className="controlsInfo">
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div className="keyForm">
+          <Image
+            src={logoImageSrc}
+            width={width}
+            height={height}
+            style={{ position: "relative"}}
+            alt={""}
+          />
         </div>
-    );
-}
+        {/* <div>
+              <Image
+                src={titleImageSrc}
+                width={310}
+                height={90}
+                style={{ marginLeft: "2px", marginTop: "15px" }}
+                alt={""}
+              />
+            </div> */}
+      </div>
+    </div>
+  );
+};
 
 export default ControlsInfo;

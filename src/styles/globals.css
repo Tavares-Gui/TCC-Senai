@@ -307,6 +307,19 @@ a {
   border: 2px #d5dde0 solid;
 }
 
+.keyForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  width: 5em;
+  height: 5em;
+  border-radius: 100%;
+  box-shadow: initial;
+  margin-left: 20px;
+  border: 2px #d5dde0 solid;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);
