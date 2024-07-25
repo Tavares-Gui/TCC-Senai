@@ -28,6 +28,17 @@ a {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+.buttonStartPress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 5em;
+  background: #9b9b9b;
+  margin-left: 14em;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 .buttonStart:before {
   content: "";
   position: absolute;
@@ -38,6 +49,21 @@ a {
   background-color: #fff;
   transform-origin: right bottom;
   transform: skewY(45deg);
+  border-radius: 0 0 0 5px;
+  border-radius: 0 0 0 5px;
+}
+
+.buttonStartPress:before {
+  content: "";
+  position: absolute;
+  top: 1;
+  left: 214px;
+  width: 8px;
+  height: 12.3%;
+  background-color: #fff;
+  transform-origin: right bottom;
+  transform: skewY(45deg);
+  border-radius: 0 0 0 5px;
   border-radius: 0 0 0 5px;
 }
 
@@ -54,6 +80,18 @@ a {
   border-radius: 0 5px 0 0;
 }
 
+.buttonStartPress:after {
+  content: "";
+  position: absolute;
+  top: 535px;
+  left: 12;
+  width: 30.2%;
+  height: 8px;
+  background-color: #fff;
+  transform-origin: bottom left;
+  transform: skewX(45deg);
+  border-radius: 0 5px 0 0;
+}
 
 .div3d {
   background-color: #d8dde0;
@@ -117,6 +155,50 @@ a {
   z-index: 1;
 }
 
+.controlsInfo {
+  width: 75%;
+  height: 7.5em;
+  background: #9b9b9b;
+  margin-left: 3em;
+  display: flex;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  align-items: center;
+  border-radius: 5px;
+  transform: skewY(0deg);
+  margin-top: 30px;
+  transition: transform 0.3s ease;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  animation: pulse 7s infinite;
+}
+
+.controlsInfo:before {
+  content: "";
+  position: absolute;
+  right: -12px;
+  width: 15px;
+  height: 100%;
+  bottom: 13px;
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transform-origin: right bottom;
+  transform: skewY(-45deg);
+  border-radius: 0 0 0 5px;
+}
+
+.controlsInfo:after {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -1px;
+  width: 100%;
+  height: 15px;
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transform-origin: bottom left;
+  transform: skewX(-45deg);
+  border-radius: 0 5px 0 0; 
+}
+
 .vira {
   width: 80%;
   height: 9em;
@@ -142,6 +224,7 @@ a {
   background-color: #fff;
   transform-origin: right bottom;
   transform: skewY(45deg);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   /* border-radius: 0 0 0 5px;
   border-right: none;
   border-left: 2px solid rgba(255, 0, 0, 0.5);
@@ -159,6 +242,7 @@ a {
   background-color: #fff;
   transform-origin: bottom left;
   transform: skewX(45deg);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   /* border-radius: 0 5px 0 0;
   border-left: none;
   border-right: 2px solid rgba(255, 0, 0, 0.5);
@@ -196,7 +280,7 @@ a {
 .divControls:before {
   content: "";
   position: absolute;
-  right: -17px;
+  right: -15px;
   width: 15px;
   height: 100%;
   bottom: 13px;
@@ -222,13 +306,16 @@ a {
   margin-left: 20px;
   border: 2px #d5dde0 solid;
 }
+
 @keyframes pulse {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.04);
   }
+
   100% {
     transform: scale(1);
   }
