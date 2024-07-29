@@ -13,7 +13,7 @@ const Overlay = () => {
                 width: '100%',
                 height: '100%',
                 zIndex: 0,
-                backgroundImage: `url('./background/foikk.png')`,
+                backgroundImage: `url('./images/Background.png')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
             }}

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import start from '../../public/background/start.png';
+import start from '../../public/images/buttonStart.png';
 
-const Start = () => {
+const ButtonStart = () => {
     const [clicked, setClicked] = useState(false);
 
     const handleClick = () => {
@@ -16,4 +16,4 @@ const Start = () => {
     );
 }
 
-export default Start;
+export default ButtonStart;
