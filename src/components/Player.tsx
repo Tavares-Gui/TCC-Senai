@@ -151,7 +151,6 @@ const Player = () => {
 
   return (
     <>
-      {console.log(scene)}
       <OrbitControls ref={controlsRef} enableZoom={true} enablePan={false} />
       <primitive object={scene} />
     </>
