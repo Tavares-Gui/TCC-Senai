@@ -1,34 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Stats } from '@react-three/drei';
-import { Physics } from '@react-three/cannon';
+import { Physics, usePlane, Debug } from '@react-three/cannon';
 import * as THREE from "three";
 import LightBulb from '../components/LightBulb';
 import Bus from '../components/Bus';
 import Player from '../components/Player';
 import Warehouse from '../components/Warehouse';
-import Plane from '../components/Plane';
 
-interface BusRef {
-  getBoundingBox: () => THREE.Box3;
-}
+const Plane = () => {
+  usePlane(() => ({
+    rotation: [-Math.PI / 2, 0, 0],
+    position: [0, 0, 0],
+  }));
+
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+      <planeGeometry args={[100, 100]} />
+      <meshStandardMaterial color="lightgreen" />
+    </mesh>
+  );
+};
 
 const Home: React.FC = () => {
   const conVisible = true;
-  const busRef = useRef<BusRef>(null);
-  const [collidableObjects, setCollidableObjects] = useState<THREE.Box3[]>([]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (busRef.current) {
-        const busBoundingBox = busRef.current.getBoundingBox();
-        setCollidableObjects([busBoundingBox]);
-        clearInterval(interval);
-      }
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, []);
 
   const lightPositions: [number, number, number][] = [
     [15, 5, 14],
@@ -55,13 +50,15 @@ const Home: React.FC = () => {
         {conVisible && <axesHelper args={[2]} />}
         <ambientLight intensity={1} />
         <Physics>
-          <Plane />
-          <Warehouse />
-          {lightPositions.map((position, index) => (
-            <LightBulb key={index} position={position} />
-          ))}
-          <Bus ref={busRef} />
-          <Player collidableObjects={collidableObjects} />
+          <Debug>
+            <Plane />
+            <Warehouse />
+            {lightPositions.map((position, index) => (
+              <LightBulb key={index} position={position} />
+            ))}
+            <Bus />
+            <Player />
+          </Debug>
         </Physics>
       </Canvas>
     </div>

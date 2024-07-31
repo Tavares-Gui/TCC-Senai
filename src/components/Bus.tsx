@@ -1,73 +1,39 @@
-<<<<<<< HEAD
-import React, {
-  useEffect,
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-} from "react";
-=======
-import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
->>>>>>> df104e70594771a616b47f11b848fc99cdc48cfd
+import React, { useEffect, forwardRef } from "react";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
+import { useBox } from '@react-three/cannon';
 
 const Bus = forwardRef((props, ref) => {
-<<<<<<< HEAD
   const busModel = useLoader(GLTFLoader, "./models/bus.glb");
-  const boundingBoxRef = useRef(new THREE.Box3());
 
-  useEffect(() => {
-    if (busModel) {
-      busModel.scene.rotation.set(0, Math.PI / 2, 0);
-      busModel.scene.position.set(2, 0, 4);
-      busModel.scene.traverse((objeto) => {
-        if (objeto instanceof THREE.Mesh) {
-          objeto.castShadow = true;
-        }
-      });
-
-      boundingBoxRef.current.setFromObject(busModel.scene);
+  busModel.scene.traverse((objeto) => {
+    if (objeto instanceof THREE.Mesh) {
+      objeto.castShadow = true;
     }
-  }, [busModel]);
+  });
 
-  useImperativeHandle(ref, () => ({
-    getBoundingBox: () => boundingBoxRef.current,
+  const [boxRef] = useBox(() => ({
+    mass: 0,
+    position: [4, 0, 2],
+    args: [3, 8, 14],
   }));
 
-  return <primitive object={busModel.scene} />;
-=======
-    const busModel = useLoader(GLTFLoader, './models/bus.glb');
-    const boundingBoxRef = useRef(new THREE.Box3());
+  const handleClick = () => {
+    // alert("Ônibus clicado!");
+  };
 
-    useEffect(() => {
-        if (busModel) {
-            busModel.scene.rotation.set(0, Math.PI / 2, 0);
-            busModel.scene.position.set(2, 0, 4);
-            busModel.scene.traverse((objeto) => {
-                if (objeto instanceof THREE.Mesh) {
-                    objeto.castShadow = true;
-                }
-            });
-
-            boundingBoxRef.current.setFromObject(busModel.scene);
-        }
-    }, [busModel]);
-
-    useImperativeHandle(ref, () => ({
-        getBoundingBox: () => boundingBoxRef.current
-    }));
-
-    return (
-        <primitive object={busModel.scene} />
-    );
->>>>>>> df104e70594771a616b47f11b848fc99cdc48cfd
+  return (
+    <group {...props} dispose={null}>
+      <primitive
+        object={busModel.scene}
+        onClick={handleClick}
+        position={[4, 0, 4]}
+      />
+    </group>
+  );
 });
 
 Bus.displayName = "Bus";
 
-<<<<<<< HEAD
 export default Bus;
-=======
-export default Bus;
->>>>>>> df104e70594771a616b47f11b848fc99cdc48cfd
