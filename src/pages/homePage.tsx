@@ -1,6 +1,6 @@
 import React from 'react';
-import CanvasGroup from './canvas';
-import Overlay from './overlay';
+import CanvasGroup from './playerHome';
+import Overlay from './overlayHome';
 
 const HomePage = () => {
     return (

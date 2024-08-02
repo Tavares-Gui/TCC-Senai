@@ -1,33 +1,37 @@
-import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useEffect, forwardRef } from "react";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
+import { useBox } from '@react-three/cannon';
 
 const Bus = forwardRef((props, ref) => {
-    const busModel = useLoader(GLTFLoader, './models/bus.glb');
-    const boundingBoxRef = useRef(new THREE.Box3());
+  const busModel = useLoader(GLTFLoader, "./models/bus.glb");
 
-    useEffect(() => {
-        if (busModel) {
-            busModel.scene.rotation.set(0, Math.PI / 2, 0);
-            busModel.scene.position.set(2, 0, 4);
-            busModel.scene.traverse((objeto) => {
-                if (objeto instanceof THREE.Mesh) {
-                    objeto.castShadow = true;
-                }
-            });
+  busModel.scene.traverse((objeto) => {
+    if (objeto instanceof THREE.Mesh) {
+      objeto.castShadow = true;
+    }
+  });
 
-            boundingBoxRef.current.setFromObject(busModel.scene);
-        }
-    }, [busModel]);
+  const [boxRef] = useBox(() => ({
+    mass: 0,
+    position: [4, 0, 2],
+    args: [3, 8, 14],
+  }));
 
-    useImperativeHandle(ref, () => ({
-        getBoundingBox: () => boundingBoxRef.current
-    }));
+  const handleClick = () => {
+    // alert("Ônibus clicado!");
+  };
 
-    return (
-        <primitive object={busModel.scene} />
-    );
+  return (
+    <group {...props} dispose={null}>
+      <primitive
+        object={busModel.scene}
+        onClick={handleClick}
+        position={[4, 0, 4]}
+      />
+    </group>
+  );
 });
 
 Bus.displayName = "Bus";

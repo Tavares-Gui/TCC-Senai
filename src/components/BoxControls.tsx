@@ -7,11 +7,11 @@ interface ControlsInfo {
   height: number;
 }
 
-const ControlsInfo: React.FC<ControlsInfo> = ({
+const BoxControls: React.FC<ControlsInfo> = ({
   logoImageSrc,
   titleImageSrc,
   width,
-  height
+  height,
 }) => {
   return (
     <div className="controlsInfo">
@@ -21,22 +21,22 @@ const ControlsInfo: React.FC<ControlsInfo> = ({
             src={logoImageSrc}
             width={width}
             height={height}
-            style={{ position: "relative"}}
+            style={{ position: "relative" }}
             alt={""}
           />
         </div>
-        {/* <div>
-              <Image
-                src={titleImageSrc}
-                width={310}
-                height={90}
-                style={{ marginLeft: "2px", marginTop: "15px" }}
-                alt={""}
-              />
-            </div> */}
+        <div>
+          <Image
+            src={titleImageSrc}
+            width={200}
+            height={50}
+            style={{ marginLeft: "15px", marginTop: "10px" }}
+            alt={""}
+          />
+        </div>
       </div>
     </div>
   );
 };
 
-export default ControlsInfo;
+export default BoxControls;

@@ -155,9 +155,24 @@ a {
   z-index: 1;
 }
 
+.watermarkName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 6.9em;
+  bottom: 1.2em;
+  background-color: #fff;
+  width: 4em;
+  height: 1.2em;
+  transform: skewY(0deg);
+  border-radius: 5px;
+  z-index: 1;
+}
+
 .controlsInfo {
-  width: 75%;
-  height: 7.5em;
+  width: 78%;
+  height: 8em;
   background: #9b9b9b;
   margin-left: 3em;
   display: flex;
@@ -165,7 +180,7 @@ a {
   align-items: center;
   border-radius: 5px;
   transform: skewY(0deg);
-  margin-top: 30px;
+  margin-top: 33px;
   transition: transform 0.3s ease;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   animation: pulse 7s infinite;
@@ -252,8 +267,8 @@ a {
 
 .divControls {
   background-color: #d8dde0;
-  width: 25em;
-  height: 30em;
+  width: 28em;
+  height: 32em;
   box-shadow: -10px 5px 30px rgba(0, 0, 0, 0.5);
   transform: skewY(5deg);
   transition: 0.5s;
@@ -319,6 +334,26 @@ a {
   margin-left: 20px;
   border: 2px #d5dde0 solid;
 }
+
+.nameInput {
+  position: relative;
+  left: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18em;
+  height: 2.4em;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.nameInputInside {
+  width: 17.5em;
+  height: 1.8em;
+  border-radius: 20px;
+  background-color: #d8dde0;
+}
+
 
 @keyframes pulse {
   0% {

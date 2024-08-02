@@ -1,6 +1,7 @@
 import React from 'react';
 import About from '../components/About';
 import Controls from '../components/Controls';
+import InputName from '../components/InputName';
 
 
 const Overlay = () => {
@@ -13,7 +14,7 @@ const Overlay = () => {
                 width: '100%',
                 height: '100%',
                 zIndex: 0,
-                backgroundImage: `url('./background/foikk.png')`,
+                backgroundImage: `url('./images/Background.png')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
             }}
@@ -30,6 +31,19 @@ const Overlay = () => {
                 }}
             >
                 <About />
+            </div>
+            <div
+                style={{
+                    width: '100%',
+                    height: '40%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    position: 'absolute',
+                    zIndex: 10,
+                }}
+            >
+                <InputName />
             </div>
             <div
                 style={{
