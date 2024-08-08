@@ -50,7 +50,7 @@ const Home: React.FC = () => {
         {conVisible && <axesHelper args={[2]} />}
         <ambientLight intensity={1} />
         <Physics>
-          <Debug>
+          {/* <Debug> */}
             <Plane />
             <Warehouse />
             {lightPositions.map((position, index) => (
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
             ))}
             <Bus />
             <Player />
-          </Debug>
+          {/* </Debug> */}
         </Physics>
       </Canvas>
     </div>

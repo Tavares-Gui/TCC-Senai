@@ -62,8 +62,8 @@ const Player = () => {
   });
 
   const [ref, api] = useBox(() => ({
-    mass: 1,
-    position: [0, 1, 0],
+    mass: 0,
+    position: [0, 0.1, 0],
     args: [1, 2, 1],
   }));
 
