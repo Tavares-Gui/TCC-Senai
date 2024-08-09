@@ -3,7 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 
 const Warehouse = () => {
-  const model = useLoader(GLTFLoader, "./models/bosch.glb");
+  const model = useLoader(GLTFLoader, "./models/boschAtt.glb");
 
   model.scene.traverse((objeto) => {
     if (objeto instanceof THREE.Mesh) {
