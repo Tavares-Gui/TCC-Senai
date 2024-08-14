@@ -8,6 +8,7 @@ import Bus from '../components/Bus';
 import Player from '../components/Player';
 import Warehouse from '../components/Warehouse';
 import Television from '../components/Television';
+import Betinho from '../components/Betinho';
 
 const Plane = () => {
   usePlane(() => ({
@@ -44,6 +45,13 @@ const Home: React.FC = () => {
     [-11, 5, -23],
   ];
 
+  const busPositions: [number, number, number][] = [
+    [-5, 0, 14],
+    [10, 0, 14],
+    [20, 0, 14],
+    [30, 0, 14]
+  ];
+
   return (
     <div className="container">
       <Canvas shadows>
@@ -53,12 +61,15 @@ const Home: React.FC = () => {
         <Physics>
           {/* <Debug> */}
             <Plane />
-            <Television />
             <Warehouse />
+            <Television />
+            <Betinho />
             {lightPositions.map((position, index) => (
               <LightBulb key={index} position={position} />
             ))}
-            <Bus />
+            {busPositions.map((position, index) => (
+              <Bus key={index} position={position} />
+            ))}
             <Player />
           {/* </Debug> */}
         </Physics>

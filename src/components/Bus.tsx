@@ -4,7 +4,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 import { useBox } from '@react-three/cannon';
 
-const Bus = forwardRef((props, ref) => {
+interface BusProps {
+  position: [number, number, number];
+}
+
+const Bus: React.FC<BusProps> = ({position}) => {
   const busModel = useLoader(GLTFLoader, "./models/bus.glb");
 
   busModel.scene.traverse((objeto) => {
@@ -15,7 +19,7 @@ const Bus = forwardRef((props, ref) => {
 
   const [boxRef] = useBox(() => ({
     mass: 0,
-    position: [4, 0, 2],
+    position: [position[0], position[1], position[2]],
     args: [3, 8, 14],
   }));
 
@@ -24,16 +28,14 @@ const Bus = forwardRef((props, ref) => {
   };
 
   return (
-    <group {...props} dispose={null}>
       <primitive
         object={busModel.scene}
         onClick={handleClick}
-        position={[-5, 0, 14]}
+        position={position}
         rotation={[0,Math.PI - 50, 0]}
       />
-    </group>
   );
-});
+};
 
 Bus.displayName = "Bus";
 
