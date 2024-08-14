@@ -7,6 +7,7 @@ import LightBulb from '../components/LightBulb';
 import Bus from '../components/Bus';
 import Player from '../components/Player';
 import Warehouse from '../components/Warehouse';
+import Television from '../components/Television';
 
 const Plane = () => {
   usePlane(() => ({
@@ -52,6 +53,7 @@ const Home: React.FC = () => {
         <Physics>
           {/* <Debug> */}
             <Plane />
+            <Television />
             <Warehouse />
             {lightPositions.map((position, index) => (
               <LightBulb key={index} position={position} />

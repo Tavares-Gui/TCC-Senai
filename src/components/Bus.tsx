@@ -28,7 +28,7 @@ const Bus = forwardRef((props, ref) => {
       <primitive
         object={busModel.scene}
         onClick={handleClick}
-        position={[-5, 0, 30]}
+        position={[-5, 0, 14]}
         rotation={[0,Math.PI - 50, 0]}
       />
     </group>
