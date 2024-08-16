@@ -14,7 +14,7 @@ const Warehouse = () => {
   return (
     <primitive
       object={model.scene}
-      scale={[1.4, 1.4, 1.4]}
+      scale={[1.45, 1.45, 1.45]}
       position={[0, 0, 0]}
     />
   );

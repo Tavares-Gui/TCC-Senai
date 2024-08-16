@@ -1,8 +1,7 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Stats } from '@react-three/drei';
+import { Stats, Sky } from '@react-three/drei'; 
 import { Physics, usePlane, Debug } from '@react-three/cannon';
-import * as THREE from "three";
 import LightBulb from '../components/LightBulb';
 import Bus from '../components/Bus';
 import Player from '../components/Player';
@@ -57,6 +56,7 @@ const Home: React.FC = () => {
         {conVisible && <Stats />}
         {conVisible && <axesHelper args={[2]} />}
         <ambientLight intensity={1} />
+        <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
         <Physics>
           {/* <Debug> */}
             <Plane />
