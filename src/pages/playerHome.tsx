@@ -30,7 +30,7 @@ const CanvasGroup: React.FC = () => {
   };
 
   return (
-    <Canvas style={{ height: "100vh", width: "100vw" }} shadows>
+    <Canvas style={{ height: "100vh", width: "100%" }} shadows>
       <ambientLight intensity={1.5} />
       <Betinho />
       <OrbitControls

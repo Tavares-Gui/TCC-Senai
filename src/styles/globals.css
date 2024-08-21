@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'BoschSans';
+  src: url('/fonts/BoschSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpecialAlphabet';
+  src: url('/fonts/specialalphabetsp04.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   padding: 0;
@@ -32,3 +46,92 @@ a {
   background-image: url('../../public/images/color.svg');
 }
 
+.corpo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bemvindo {
+  font-family: 'BoschSans', sans-serif;
+  font-size: 1rem;
+  color: black;
+  margin: 2em 0 0 0;
+}
+
+@keyframes mirrorRotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+.rotate {
+  animation: mirrorRotate 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+
+
+.groupMeta {
+  display: flex;
+  margin-top: 0.15em;
+}
+
+.groupMeta h1 {
+  margin: 0 0.02em 0 0.02em;
+  padding: 0;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.fontX {
+  font-family: 'SpecialAlphabet', sans-serif;
+  font-size: 2.7rem;
+  margin-top: 0.1em !important;
+}
+
+.fontB {
+  font-family: 'BoschSans', sans-serif;
+  font-size: 2.7rem;
+}
+
+.groupMeta h1:nth-child(1) {
+  color: #007BC0;
+}
+
+.groupMeta h1:nth-child(2) {
+  color: #9E2896;
+}
+
+.groupMeta h1:nth-child(3) {
+  color: #18837E;
+}
+
+.groupMeta h1:nth-child(4) {
+  color: #9E2896;
+}
+
+.groupMeta h1:nth-child(5) {
+  color: #007BC0;
+}
+
+.groupMeta h1:nth-child(6) {
+  color: #18837E;
+}
+
+.groupMeta h1:nth-child(7) {
+  color: #007BC0;
+}
+
+.groupMeta h1:nth-child(8) {
+  color: #9E2896;
+}
+
+.groupMeta h1:nth-child(9) {
+  color: #18837E;
+}
