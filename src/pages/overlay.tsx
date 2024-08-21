@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import logoBosch from "../../public/images/logo_bosch.png";
 import ButtonX from "../components/ButtonX";
 
 const Overlay: React.FC = () => {
@@ -43,6 +44,9 @@ const Overlay: React.FC = () => {
           <ButtonX>INICIAR</ButtonX>
           <ButtonX styleType="buttonFec">TUTORIAL</ButtonX>
           <ButtonX styleType="buttonVazVerde">SOBRE</ButtonX>
+        </div>
+        <div className="footerLogo">
+          <img src={logoBosch} className="boschImage" alt="Bosch Logo" />
         </div>
       </div>
     </>

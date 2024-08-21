@@ -168,3 +168,12 @@ a {
   color: white;
   font-family: "BoschSans", sans-serif;
 }
+
+.footerLogo {
+  position: absolute;
+  bottom: 0px;
+}
+
+.boschImage {
+  width: 5rem;
+}
