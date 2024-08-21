@@ -1,18 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
+import ButtonX from "../components/ButtonX";
 
 const Overlay: React.FC = () => {
   useEffect(() => {
     const rotateRandomly = () => {
-      document.querySelectorAll('.fontX').forEach(el => el.classList.remove('rotate'));
+      document
+        .querySelectorAll(".fontX")
+        .forEach((el) => el.classList.remove("rotate"));
 
-      const elements = document.querySelectorAll('.fontX');
+      const elements = document.querySelectorAll(".fontX");
       const randomIndex = Math.floor(Math.random() * elements.length);
       const selectedElement = elements[randomIndex];
 
-      selectedElement.classList.add('rotate');
+      selectedElement.classList.add("rotate");
 
       setTimeout(() => {
-        selectedElement.classList.remove('rotate');
+        selectedElement.classList.remove("rotate");
       }, 1500);
     };
 
@@ -35,6 +38,11 @@ const Overlay: React.FC = () => {
           <h1 className="fontB">R</h1>
           <h1 className="fontB">S</h1>
           <h1 className="fontX">O</h1>
+        </div>
+        <div className="botoes">
+          <ButtonX>INICIAR</ButtonX>
+          <ButtonX styleType="buttonFec">TUTORIAL</ButtonX>
+          <ButtonX styleType="buttonVazVerde">SOBRE</ButtonX>
         </div>
       </div>
     </>
