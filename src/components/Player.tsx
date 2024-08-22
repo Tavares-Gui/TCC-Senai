@@ -3,7 +3,11 @@ import { useEffect, useRef } from "react";
 import { useInput } from "../hooks/useInput";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+<<<<<<< HEAD
 import { useBox } from "@react-three/cannon";
+=======
+import { useBox } from '@react-three/cannon';
+>>>>>>> 1c9784df28c41e732106e27d8f717d9a1894a48f
 
 let walkDirection = new THREE.Vector3();
 let rotateAngle = new THREE.Vector3(0, 1, 0);
@@ -135,11 +139,15 @@ const Player = () => {
       const moveX = walkDirection.x * velocity * delta;
       const moveZ = walkDirection.z * velocity * delta;
 
+<<<<<<< HEAD
       api.position.set(
         scene.position.x + moveX,
         scene.position.y,
         scene.position.z + moveZ
       );
+=======
+      api.position.set(scene.position.x + moveX, scene.position.y, scene.position.z + moveZ);
+>>>>>>> 1c9784df28c41e732106e27d8f717d9a1894a48f
 
       updateCameraTarget(moveX, moveZ);
     }
