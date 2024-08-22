@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useEffect } from "react";
 import logoBosch from "../../public/images/logo_bosch.png";
 import ButtonX from "../components/ButtonX";
@@ -46,7 +47,7 @@ const Overlay: React.FC = () => {
           <ButtonX styleType="buttonVazVerde">SOBRE</ButtonX>
         </div>
         <div className="footerLogo">
-          <img src={logoBosch} className="boschImage" alt="Bosch Logo" />
+          <Image src={logoBosch} alt="Logo Bosch" width={200} height={100} />
         </div>
       </div>
     </>
