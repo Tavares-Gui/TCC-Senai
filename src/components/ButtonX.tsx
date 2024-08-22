@@ -7,9 +7,13 @@ interface ButtonXProps {
 
 const ButtonX: React.FC<ButtonXProps> = ({ children, styleType = "buttonVazAzul" }) => {
   return (
-    <button className={styleType}>
-      {children}
-    </button>
+    <div className="buttonConj">
+      <button className={styleType}>
+        {children}
+      </button>
+      <div className="buttonFecHover" />
+      <div className="buttonFecHover2" />
+    </div>
   );
 };
 

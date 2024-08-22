@@ -140,10 +140,15 @@ a {
   margin-top: 3rem;
 }
 
+.buttonConj {
+  display: inline-block;
+  position: relative;
+  margin-top: 1.5rem;
+}
+
 .buttonVazAzul {
   width: 9rem;
   height: 3.2rem;
-  margin-bottom: 1.5rem;
   background-color: white;
   border: #007bc0 3px solid;
   color: #007bc0;
@@ -162,11 +167,41 @@ a {
 .buttonFec {
   width: 9rem;
   height: 3.2rem;
-  margin-bottom: 1.5rem;
   background-color: #9e2896;
   border: 0;
   color: white;
   font-family: "BoschSans", sans-serif;
+  z-index: 2;
+}
+
+.buttonFecHover,
+.buttonFecHover2 {
+  position: absolute;
+  left: 50%; 
+  transform: translateX(-50%); 
+  height: 0; 
+  opacity: 0; 
+  border: 0;
+  z-index: 1;
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.buttonFecHover {
+  top: 100%;
+  width: 8.5rem;
+  background-color: #ebcae8;
+}
+
+.buttonFecHover2 {
+  top: calc(100% + 0.3rem);
+  width: 8rem;
+  background-color: #e5a2df;
+}
+
+.buttonConj:hover .buttonFecHover,
+.buttonConj:hover .buttonFecHover2 {
+  height: 0.3rem;
+  opacity: 1;
 }
 
 .footerLogo {
