@@ -24,7 +24,7 @@ const Plane = () => {
 };
 
 const Home: React.FC = () => {
-  const conVisible = true;
+  const conVisible = false;
 
   const lightPositions: [number, number, number][] = [
     [15, 5, 14],

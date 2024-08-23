@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import CanvasGroup from "./playerHome";
 import Overlay from "./overlay";
-import CollectionImage from "../components/CollectionImage";
+import CollectionGallery from "../components/CollectionGallery";
 
 const HomePage = () => {
   return (
@@ -11,7 +11,7 @@ const HomePage = () => {
         <Overlay />
       </Grid>
       <Grid item xs={5}>
-        <CollectionImage />
+        <CollectionGallery />
         <CanvasGroup />
       </Grid>
     </Grid>

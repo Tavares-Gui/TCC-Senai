@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import logoBosch from "../../public/images/logo_bosch.png";
+import logoFCM from "../../public/images/FCM.svg";
+import logoGR from "../../public/images/GR.svg";
 import ButtonX from "../components/ButtonX";
 
 const Overlay: React.FC = () => {
@@ -48,6 +50,10 @@ const Overlay: React.FC = () => {
         </div>
         <div className="footerLogo">
           <Image src={logoBosch} alt="Logo Bosch" className="boschImage" />
+          <h1 style={{fontSize: '1em', color: '#007bc0', marginLeft: 3, marginRight: 4}}>|</h1>
+          <Image src={logoFCM} alt="Logo FCM" className="boschImage" />
+          <h1 style={{fontSize: '1em', color: '#18837e', marginLeft: 3, marginRight: 4}}>|</h1>
+          <Image src={logoGR} alt="Logo GR" className="boschImage" />
         </div>
       </div>
     </>
