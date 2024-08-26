@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useAnimations, useGLTF } from "@react-three/drei";
 
 const Betinho: React.FC = () => {
-  const { scene, animations } = useGLTF("./models/ROBERTO.glb");
+  const { scene, animations } = useGLTF("./models/BETINHO.glb");
   const { actions } = useAnimations(animations, scene);
 
   scene.position.set(0, -5, 0);
