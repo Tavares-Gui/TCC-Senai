@@ -58,7 +58,7 @@ const Home: React.FC = () => {
         <ambientLight intensity={1} />
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
         <Physics>
-          {/* <Debug> */}
+          <Debug>
             <Plane />
             <Warehouse />
             <Television />
@@ -70,7 +70,7 @@ const Home: React.FC = () => {
               <Bus key={index} position={position} />
             ))}
             <Player />
-          {/* </Debug> */}
+          </Debug>
         </Physics>
       </Canvas>
     </div>

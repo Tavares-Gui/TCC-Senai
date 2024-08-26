@@ -23,16 +23,11 @@ const Bus: React.FC<BusProps> = ({position}) => {
     args: [3, 8, 14],
   }));
 
-  const handleClick = () => {
-    // alert("Ônibus clicado!");
-  };
-
   return (
       <primitive
         object={busModel.scene}
-        onClick={handleClick}
         position={position}
-        rotation={[0,Math.PI - 50, 0]}
+        rotation={[0, Math.PI - 50, 0]}
       />
   );
 };

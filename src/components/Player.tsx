@@ -52,7 +52,7 @@ const directionOffset = ({
 
 const Player = () => {
   const { forward, backward, left, right, shift } = useInput();
-  const { scene, animations } = useGLTF("./models/ROBERTO.glb");
+  const { scene, animations } = useGLTF("./models/COLABORADORH.glb");
   const { actions } = useAnimations(animations, scene);
 
   scene.traverse((objeto) => {
@@ -62,9 +62,9 @@ const Player = () => {
   });
 
   const [ref, api] = useBox(() => ({
-    mass: 0,
-    position: [0, 0.1, 0],
-    args: [1, 2, 1],
+    mass: 1,
+    position: [0, 1, 0],
+    args: [1, 2, 1]
   }));
 
   const currentAction = useRef<string>("idle");
