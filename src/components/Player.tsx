@@ -130,8 +130,9 @@ const Player = () => {
       const moveX = walkDirection.x * velocity * delta;
       const moveZ = walkDirection.z * velocity * delta;
 
-      scene.position.x += moveX;
-      scene.position.z += moveZ;
+      if (rigidBody.current) {
+        rigidBody.current.applyImpulse({ x: moveX, y: 0, z: moveZ }, true);
+      }
 
       updateCameraTarget(moveX, moveZ);
     }
@@ -140,16 +141,14 @@ const Player = () => {
   return (
     <>
       <OrbitControls ref={controlsRef} enableZoom={true} enablePan={true} />
-      {/* <RigidBody
+      <RigidBody
         ref={rigidBody}
-        colliders="cuboid" 
+        colliders='trimesh' 
+        type='kinematicPosition'
         position={[0, 3, 0]}
-        rotation={[0, 0, 0]}
-        restitution={0.1}
-        friction={0.5}
-      > */}
-        <primitive object={scene} position={[0,0.1,0]}/>
-      {/* </RigidBody> */}
+      >
+        <primitive object={scene}/>
+      </RigidBody>
     </>
   );
 };
