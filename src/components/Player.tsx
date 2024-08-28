@@ -1,9 +1,9 @@
 import { OrbitControls, useAnimations, useGLTF } from "@react-three/drei";
+import { RigidBody, useRapier, vec3 } from "@react-three/rapier";
 import { useEffect, useRef } from "react";
 import { useInput } from "../hooks/useInput";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { useBox } from "@react-three/cannon";
 
 let walkDirection = new THREE.Vector3();
 let rotateAngle = new THREE.Vector3(0, 1, 0);
@@ -52,7 +52,7 @@ const directionOffset = ({
 
 const Player = () => {
   const { forward, backward, left, right, shift } = useInput();
-  const { scene, animations } = useGLTF("./models/ROBERTO.glb");
+  const { scene, animations } = useGLTF("./models/COLABORADORH.glb");
   const { actions } = useAnimations(animations, scene);
 
   scene.traverse((objeto) => {
@@ -60,12 +60,6 @@ const Player = () => {
       (objeto as THREE.Mesh).castShadow = true;
     }
   });
-
-  const [ref, api] = useBox(() => ({
-    mass: 0,
-    position: [0, 0.1, 0],
-    args: [1, 2, 1],
-  }));
 
   const currentAction = useRef<string>("idle");
   const controlsRef = useRef<any>(null);
@@ -135,28 +129,19 @@ const Player = () => {
       const moveX = walkDirection.x * velocity * delta;
       const moveZ = walkDirection.z * velocity * delta;
 
-      api.position.set(
-        scene.position.x + moveX,
-        scene.position.y,
-        scene.position.z + moveZ
-      );
+      scene.position.x += moveX;
+      scene.position.z += moveZ;
 
       updateCameraTarget(moveX, moveZ);
     }
   });
 
-  useEffect(() => {
-    const unsubscribe = api.position.subscribe((p) => {
-      scene.position.set(p[0], p[1], p[2]);
-    });
-
-    return () => unsubscribe();
-  }, [api.position, scene.position]);
-
   return (
     <>
-      <OrbitControls ref={controlsRef} enableZoom={true} enablePan={false} />
-      <primitive object={scene} />
+      <OrbitControls ref={controlsRef} enableZoom={true} enablePan={true} />
+      <RigidBody colliders="cuboid" scale={[1, 1, 1]} position={[0, 3, 0]}>
+        <primitive object={scene} />
+      </RigidBody>
     </>
   );
 };

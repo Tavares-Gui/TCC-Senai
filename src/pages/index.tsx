@@ -1,27 +1,13 @@
-import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Stats, Sky } from '@react-three/drei'; 
-import { Physics, usePlane, Debug } from '@react-three/cannon';
+import { Stats, Sky } from '@react-three/drei';
 import LightBulb from '../components/LightBulb';
 import Bus from '../components/Bus';
 import Player from '../components/Player';
 import Warehouse from '../components/Warehouse';
 import Television from '../components/Television';
 import Betinho from '../components/Betinho';
-
-const Plane = () => {
-  usePlane(() => ({
-    rotation: [-Math.PI / 2, 0, 0],
-    position: [0, 0, 0],
-  }));
-
-  return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
-      <planeGeometry args={[100, 100]} />
-      <meshStandardMaterial color="lightgreen" />
-    </mesh>
-  );
-};
+import { Physics } from "@react-three/rapier";
+import Ground from '../components/Groud';
 
 const Home: React.FC = () => {
   const conVisible = false;
@@ -57,20 +43,18 @@ const Home: React.FC = () => {
         {conVisible && <axesHelper args={[2]} />}
         <ambientLight intensity={1} />
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
-        <Physics>
-          {/* <Debug> */}
-            <Plane />
-            <Warehouse />
-            <Television />
-            <Betinho />
-            {lightPositions.map((position, index) => (
-              <LightBulb key={index} position={position} />
-            ))}
-            {busPositions.map((position, index) => (
-              <Bus key={index} position={position} />
-            ))}
-            <Player />
-          {/* </Debug> */}
+        <Physics debug>
+          <Ground />
+          <Warehouse />
+          <Television />
+          <Betinho />
+          {lightPositions.map((position, index) => (
+            <LightBulb key={index} position={position} />
+          ))}
+          {busPositions.map((position, index) => (
+            <Bus key={index} position={position} />
+          ))}
+          <Player />
         </Physics>
       </Canvas>
     </div>
