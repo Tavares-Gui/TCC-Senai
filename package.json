@@ -16,7 +16,10 @@
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
+<<<<<<< HEAD
     "@react-three/rapier": "^1.4.0",
+=======
+>>>>>>> 474bbce6bb67720a4c4a19f1fea9e2b6d87b7da8
     "cannon-es": "^0.20.0",
     "next": "^14.2.6",
     "react": "18.3.1",
