@@ -1,4 +1,5 @@
 import { useLoader } from "@react-three/fiber";
+import { RigidBody } from "@react-three/rapier";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 
@@ -12,11 +13,13 @@ const Warehouse = () => {
   });
 
   return (
-    <primitive
-      object={model.scene}
-      scale={[1.45, 1.45, 1.45]}
-      position={[0, 0, 0]}
-    />
+    <RigidBody colliders='hull' type='fixed'>
+      <primitive
+        object={model.scene}
+        scale={[1.45, 1.45, 1.45]}
+        position={[0, 0, 0]}
+      />
+    </RigidBody>
   );
 };
 

@@ -145,7 +145,7 @@ const Player = () => {
         };
 
         rigidBody.current.setTranslation(newPosition, true);
-
+        
         updateCameraTarget(moveX, moveZ);
       }
     }
@@ -157,8 +157,9 @@ const Player = () => {
       <OrbitControls ref={controlsRef} enableZoom={true} enablePan={true} />
       <RigidBody
         ref={rigidBody}
-        colliders='cuboid'
-        position={[0, 0.9, 0]}
+        colliders={'cuboid'}
+        linearDamping={12}
+        lockRotations
       >
         <primitive object={scene} />
       </RigidBody>

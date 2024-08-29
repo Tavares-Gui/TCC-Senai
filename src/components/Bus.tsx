@@ -19,7 +19,7 @@ const Bus: React.FC<BusProps> = ({ position }) => {
   return (
     <RigidBody
       type="fixed"
-      colliders="hull"
+      colliders='hull'
       position={position}
     >
       <primitive object={busModel.scene} />

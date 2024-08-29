@@ -8,6 +8,7 @@ import Television from '../components/Television';
 import Betinho from '../components/Betinho';
 import { Physics } from "@react-three/rapier";
 import Ground from '../components/Groud';
+import { Suspense } from 'react';
 
 const Home: React.FC = () => {
   const conVisible = true;
@@ -43,19 +44,21 @@ const Home: React.FC = () => {
         {conVisible && <axesHelper args={[2]} />}
         <ambientLight intensity={1} />
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
-        <Physics debug >
-          <Ground />
-          <Player />
-          <Warehouse />
-          <Television />
-          <Betinho />
-          {lightPositions.map((position, index) => (
-            <LightBulb key={index} position={position} />
-          ))}
-          {busPositions.map((position, index) => (
-            <Bus key={index} position={position} />
-          ))}
-        </Physics>
+        <Suspense>
+          <Physics debug >
+            {/* <Ground /> */}
+            <Player />
+            <Warehouse />
+            <Television />
+            <Betinho />
+            {lightPositions.map((position, index) => (
+              <LightBulb key={index} position={position} />
+            ))}
+            {busPositions.map((position, index) => (
+              <Bus key={index} position={position} />
+            ))}
+          </Physics>
+        </Suspense>
 
       </Canvas>
     </div>
