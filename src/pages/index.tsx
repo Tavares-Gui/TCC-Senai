@@ -1,30 +1,16 @@
-import React from 'react';
-import { Canvas } from '@react-three/fiber';
-import { Stats, Sky } from '@react-three/drei'; 
-import { Physics, usePlane, Debug } from '@react-three/cannon';
-import LightBulb from '../components/LightBulb';
-import Bus from '../components/Bus';
-import Player from '../components/Player';
-import Warehouse from '../components/Warehouse';
-import Television from '../components/Television';
-import Betinho from '../components/Betinho';
-
-const Plane = () => {
-  usePlane(() => ({
-    rotation: [-Math.PI / 2, 0, 0],
-    position: [0, 0, 0],
-  }));
-
-  return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
-      <planeGeometry args={[100, 100]} />
-      <meshStandardMaterial color="lightgreen" />
-    </mesh>
-  );
-};
+import { Canvas } from "@react-three/fiber";
+import { Stats, Sky } from "@react-three/drei";
+import LightBulb from "../components/LightBulb";
+import Bus from "../components/Bus";
+import Player from "../components/Player";
+import Warehouse from "../components/Warehouse";
+import Television from "../components/Television";
+import Betinho from "../components/Betinho";
+import { Physics } from "@react-three/rapier";
+import { Suspense } from "react";
 
 const Home: React.FC = () => {
-  const conVisible = false;
+  const conVisible = true;
 
   const lightPositions: [number, number, number][] = [
     [15, 5, 14],
@@ -47,7 +33,7 @@ const Home: React.FC = () => {
     [-5, 0, 14],
     [10, 0, 14],
     [20, 0, 14],
-    [30, 0, 14]
+    [30, 0, 14],
   ];
 
   return (
@@ -57,9 +43,9 @@ const Home: React.FC = () => {
         {conVisible && <axesHelper args={[2]} />}
         <ambientLight intensity={1} />
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
-        <Physics>
-          <Debug>
-            <Plane />
+        <Suspense>
+          <Physics>
+            <Player />
             <Warehouse />
             <Television />
             <Betinho />
@@ -69,9 +55,8 @@ const Home: React.FC = () => {
             {busPositions.map((position, index) => (
               <Bus key={index} position={position} />
             ))}
-            <Player />
-          </Debug>
-        </Physics>
+          </Physics>
+        </Suspense>
       </Canvas>
     </div>
   );

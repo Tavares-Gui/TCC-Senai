@@ -1,9 +1,9 @@
 import { OrbitControls, useAnimations, useGLTF } from "@react-three/drei";
+import { RigidBody, RapierRigidBody } from "@react-three/rapier";
 import { useEffect, useRef } from "react";
 import { useInput } from "../hooks/useInput";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { useBox } from "@react-three/cannon";
 
 let walkDirection = new THREE.Vector3();
 let rotateAngle = new THREE.Vector3(0, 1, 0);
@@ -52,20 +52,15 @@ const directionOffset = ({
 
 const Player = () => {
   const { forward, backward, left, right, shift } = useInput();
-  const { scene, animations } = useGLTF("./models/COLABORADORH.glb");
+  const { scene, animations } = useGLTF("./models/COLABORADORM.glb");
   const { actions } = useAnimations(animations, scene);
+  const rigidBody = useRef<RapierRigidBody>(null);
 
   scene.traverse((objeto) => {
     if ((objeto as THREE.Mesh).isMesh) {
       (objeto as THREE.Mesh).castShadow = true;
     }
   });
-
-  const [ref, api] = useBox(() => ({
-    mass: 1,
-    position: [0, 1, 0],
-    args: [1, 2, 1]
-  }));
 
   const currentAction = useRef<string>("idle");
   const controlsRef = useRef<any>(null);
@@ -90,16 +85,20 @@ const Player = () => {
   }, [forward, backward, left, right, shift, actions]);
 
   const updateCameraTarget = (moveX: number, moveZ: number) => {
-    camera.position.x += moveX;
-    camera.position.z += moveZ;
+    if (rigidBody.current) {
+      const position = rigidBody.current.translation();
 
-    cameraTarget.x = scene.position.x;
-    cameraTarget.y = scene.position.y + 2;
-    cameraTarget.z = scene.position.z;
+      camera.position.x += moveX;
+      camera.position.z += moveZ;
 
-    if (controlsRef.current) controlsRef.current.target = cameraTarget;
+      cameraTarget.x = position.x;
+      cameraTarget.y = position.y + 2;
+      cameraTarget.z = position.z;
 
-    camera.lookAt(cameraTarget);
+      if (controlsRef.current) controlsRef.current.target = cameraTarget;
+
+      camera.lookAt(cameraTarget);
+    }
   };
 
   useFrame((state, delta) => {
@@ -107,56 +106,62 @@ const Player = () => {
       currentAction.current === "running" ||
       currentAction.current === "walking"
     ) {
-      let angleYCameraDirection = Math.atan2(
-        camera.position.x - scene.position.x,
-        camera.position.z - scene.position.z
-      );
+      if (rigidBody.current) {
+        const position = rigidBody.current.translation();
 
-      let newDirectionOffset = directionOffset({
-        forward,
-        backward,
-        left,
-        right,
-      });
+        let angleYCameraDirection = Math.atan2(
+          camera.position.x - position.x,
+          camera.position.z - position.z
+        );
 
-      rotateQuaternion.setFromAxisAngle(
-        rotateAngle,
-        angleYCameraDirection + newDirectionOffset
-      );
-      scene.quaternion.rotateTowards(rotateQuaternion, 0.2);
+        let newDirectionOffset = directionOffset({
+          forward,
+          backward,
+          left,
+          right,
+        });
 
-      camera.getWorldDirection(walkDirection);
-      walkDirection.y = 0;
-      walkDirection.normalize();
-      walkDirection.applyAxisAngle(rotateAngle, newDirectionOffset);
+        rotateQuaternion.setFromAxisAngle(
+          rotateAngle,
+          angleYCameraDirection + newDirectionOffset
+        );
 
-      const velocity = currentAction.current === "running" ? 10 : 5;
+        scene.quaternion.rotateTowards(rotateQuaternion, 0.2);
 
-      const moveX = walkDirection.x * velocity * delta;
-      const moveZ = walkDirection.z * velocity * delta;
+        camera.getWorldDirection(walkDirection);
+        walkDirection.y = 0;
+        walkDirection.normalize();
+        walkDirection.applyAxisAngle(rotateAngle, newDirectionOffset);
 
-      api.position.set(
-        scene.position.x + moveX,
-        scene.position.y,
-        scene.position.z + moveZ
-      );
+        const velocity = currentAction.current === "running" ? 10 : 5;
 
-      updateCameraTarget(moveX, moveZ);
+        const moveX = walkDirection.x * velocity * delta;
+        const moveZ = walkDirection.z * velocity * delta;
+
+        const newPosition = {
+          x: position.x + moveX,
+          y: position.y,
+          z: position.z + moveZ,
+        };
+
+        rigidBody.current.setTranslation(newPosition, true);
+
+        updateCameraTarget(moveX, moveZ);
+      }
     }
   });
 
-  useEffect(() => {
-    const unsubscribe = api.position.subscribe((p) => {
-      scene.position.set(p[0], p[1], p[2]);
-    });
-
-    return () => unsubscribe();
-  }, [api.position, scene.position]);
-
   return (
     <>
-      <OrbitControls ref={controlsRef} enableZoom={true} enablePan={false} />
-      <primitive object={scene} />
+      <OrbitControls ref={controlsRef} enableZoom={true} enablePan={true} />
+      <RigidBody
+        ref={rigidBody}
+        colliders={"ball"}
+        linearDamping={12}
+        lockRotations
+      >
+        <primitive object={scene} rotation={[0, Math.PI, 0]} />
+      </RigidBody>
     </>
   );
 };
