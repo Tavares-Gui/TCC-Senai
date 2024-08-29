@@ -52,7 +52,7 @@ const directionOffset = ({
 
 const Player = () => {
   const { forward, backward, left, right, shift } = useInput();
-  const { scene, animations } = useGLTF("./models/COLABORADORH.glb");
+  const { scene, animations } = useGLTF("./models/COLABORADORM.glb");
   const { actions } = useAnimations(animations, scene);
   const rigidBody = useRef<RapierRigidBody>(null);
 
@@ -85,16 +85,20 @@ const Player = () => {
   }, [forward, backward, left, right, shift, actions]);
 
   const updateCameraTarget = (moveX: number, moveZ: number) => {
-    camera.position.x += moveX;
-    camera.position.z += moveZ;
+    if (rigidBody.current) {
+      const position = rigidBody.current.translation();
 
-    cameraTarget.x = scene.position.x;
-    cameraTarget.y = scene.position.y + 2;
-    cameraTarget.z = scene.position.z;
+      camera.position.x += moveX;
+      camera.position.z += moveZ;
 
-    if (controlsRef.current) controlsRef.current.target = cameraTarget;
+      cameraTarget.x = position.x;
+      cameraTarget.y = position.y + 2;
+      cameraTarget.z = position.z;
 
-    camera.lookAt(cameraTarget);
+      if (controlsRef.current) controlsRef.current.target = cameraTarget;
+
+      camera.lookAt(cameraTarget);
+    }
   };
 
   useFrame((state, delta) => {
@@ -102,52 +106,61 @@ const Player = () => {
       currentAction.current === "running" ||
       currentAction.current === "walking"
     ) {
-      let angleYCameraDirection = Math.atan2(
-        camera.position.x - scene.position.x,
-        camera.position.z - scene.position.z
-      );
-
-      let newDirectionOffset = directionOffset({
-        forward,
-        backward,
-        left,
-        right,
-      });
-
-      rotateQuaternion.setFromAxisAngle(
-        rotateAngle,
-        angleYCameraDirection + newDirectionOffset
-      );
-      scene.quaternion.rotateTowards(rotateQuaternion, 0.2);
-
-      camera.getWorldDirection(walkDirection);
-      walkDirection.y = 0;
-      walkDirection.normalize();
-      walkDirection.applyAxisAngle(rotateAngle, newDirectionOffset);
-
-      const velocity = currentAction.current === "running" ? 10 : 5;
-
-      const moveX = walkDirection.x * velocity * delta;
-      const moveZ = walkDirection.z * velocity * delta;
-
       if (rigidBody.current) {
-        rigidBody.current.applyImpulse({ x: moveX, y: 0, z: moveZ }, true);
-      }
+        const position = rigidBody.current.translation();
 
-      updateCameraTarget(moveX, moveZ);
+        let angleYCameraDirection = Math.atan2(
+          camera.position.x - position.x,
+          camera.position.z - position.z
+        );
+
+        let newDirectionOffset = directionOffset({
+          forward,
+          backward,
+          left,
+          right,
+        });
+
+        rotateQuaternion.setFromAxisAngle(
+          rotateAngle,
+          angleYCameraDirection + newDirectionOffset
+        );
+
+        scene.quaternion.rotateTowards(rotateQuaternion, 0.2);
+
+        camera.getWorldDirection(walkDirection);
+        walkDirection.y = 0;
+        walkDirection.normalize();
+        walkDirection.applyAxisAngle(rotateAngle, newDirectionOffset);
+
+        const velocity = currentAction.current === "running" ? 10 : 5;
+
+        const moveX = walkDirection.x * velocity * delta;
+        const moveZ = walkDirection.z * velocity * delta;
+
+        const newPosition = {
+          x: position.x + moveX,
+          y: position.y,
+          z: position.z + moveZ,
+        };
+
+        rigidBody.current.setTranslation(newPosition, true);
+
+        updateCameraTarget(moveX, moveZ);
+      }
     }
   });
+
 
   return (
     <>
       <OrbitControls ref={controlsRef} enableZoom={true} enablePan={true} />
       <RigidBody
         ref={rigidBody}
-        colliders='trimesh' 
-        type='kinematicPosition'
-        position={[0, 3, 0]}
+        colliders='cuboid'
+        position={[0, 0.9, 0]}
       >
-        <primitive object={scene}/>
+        <primitive object={scene} />
       </RigidBody>
     </>
   );

@@ -17,12 +17,12 @@ const Bus: React.FC<BusProps> = ({ position }) => {
   });
 
   return (
-    <RigidBody type="fixed" colliders="cuboid">
-      <primitive
-        object={busModel.scene}
-        position={position}
-        rotation={[0, Math.PI - 50, 0]}
-      />
+    <RigidBody
+      type="fixed"
+      colliders="hull"
+      position={position}
+    >
+      <primitive object={busModel.scene} />
     </RigidBody>
   );
 };

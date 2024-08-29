@@ -43,7 +43,7 @@ const Home: React.FC = () => {
         {conVisible && <axesHelper args={[2]} />}
         <ambientLight intensity={1} />
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
-        <Physics debug>
+        <Physics debug >
           <Ground />
           <Player />
           <Warehouse />
@@ -56,6 +56,7 @@ const Home: React.FC = () => {
             <Bus key={index} position={position} />
           ))}
         </Physics>
+
       </Canvas>
     </div>
   );
