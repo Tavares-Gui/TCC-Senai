@@ -157,7 +157,7 @@ const Player = () => {
       <RigidBody
         ref={rigidBody}
         colliders={"ball"}
-        linearDamping={12}
+        linearDamping={40}
         lockRotations
       >
         <primitive object={scene} rotation={[0, Math.PI, 0]} />
