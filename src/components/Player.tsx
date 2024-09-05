@@ -151,8 +151,8 @@ const Player = ({ sceneMeshes }: { sceneMeshes: THREE.Mesh[] }) => {
         // raycaster.ray.direction.copy(walkDirection);
         // const intersects = raycaster.intersectObjects(sceneMeshes);
         
-        let adjustedMoveX = moveX;
-        let adjustedMoveZ = moveZ;
+        // let adjustedMoveX = moveX;
+        // let adjustedMoveZ = moveZ;
 
         // if (intersects.length > 0 && intersects[0].distance < 1) {
         //   const distanceToMove = intersects[0].distance - 0.1;
@@ -163,14 +163,14 @@ const Player = ({ sceneMeshes }: { sceneMeshes: THREE.Mesh[] }) => {
         // }
 
         const newPosition = {
-          x: position.x + adjustedMoveX,
+          x: position.x + moveX,
           y: position.y,
-          z: position.z + adjustedMoveZ,
+          z: position.z + moveZ,
         };
 
         rigidBody.current.setTranslation(newPosition, true);
 
-        updateCameraTarget(adjustedMoveX, adjustedMoveZ);
+        updateCameraTarget(moveX, moveZ);
       }
     }
   });
