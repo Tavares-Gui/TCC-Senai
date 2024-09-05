@@ -1,18 +1,19 @@
-import { Canvas } from '@react-three/fiber';
-import { Stats, Sky } from '@react-three/drei';
-import LightBulb from '../components/LightBulb';
-import Bus from '../components/Bus';
-import Player from '../components/Player';
-import Warehouse from '../components/Warehouse';
-import Television from '../components/Television';
-import Betinho from '../components/Betinho';
+import { Canvas } from "@react-three/fiber";
+import { Stats, Sky } from "@react-three/drei";
+import LightBulb from "../components/LightBulb";
+import Bus from "../components/Bus";
+import Player from "../components/Player";
+import Warehouse from "../components/Warehouse";
+import Television from "../components/Television";
+import Betinho from "../components/Betinho";
 import { Physics } from "@react-three/rapier";
-import Ground from '../components/Groud';
-import { Suspense, useRef } from 'react';
+import Ground from "../components/Groud";
+import { Suspense, useRef } from "react";
 import * as THREE from "three";
+import Hud from "../components/Hud";
 
 const Home: React.FC = () => {
-  const conVisible = true;
+  const conVisible = false;
   const sceneMeshes = useRef<THREE.Mesh[]>([]);
 
   const lightPositions: [number, number, number][] = [
@@ -46,7 +47,7 @@ const Home: React.FC = () => {
         <ambientLight intensity={1} />
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
         <Suspense>
-          <Physics debug>
+          <Physics>
             {/* <Ground /> */}
             <Player sceneMeshes={sceneMeshes.current} />
             <Warehouse sceneMeshes={sceneMeshes.current} />
@@ -56,11 +57,16 @@ const Home: React.FC = () => {
               <LightBulb key={index} position={position} />
             ))}
             {busPositions.map((position, index) => (
-              <Bus key={index} position={position} sceneMeshes={sceneMeshes.current} />
+              <Bus
+                key={index}
+                position={position}
+                sceneMeshes={sceneMeshes.current}
+              />
             ))}
           </Physics>
         </Suspense>
       </Canvas>
+      <Hud />
     </div>
   );
 };

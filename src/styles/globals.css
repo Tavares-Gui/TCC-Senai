@@ -6,6 +6,13 @@
 }
 
 @font-face {
+  font-family: "BoschSansLight";
+  src: url("/fonts/BoschSans-Light.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "SpecialAlphabet";
   src: url("/fonts/specialalphabetsp04.otf") format("opentype");
   font-weight: normal;
@@ -325,7 +332,7 @@ a {
   display: flex;
   align-items: center;
   background-color: #EFF1F2;
-  width: 15em;
+  width: 20em;
   height: 6em;
   margin: 2em 0 0 3em;
   border: solid 2px #18837E;
@@ -335,22 +342,59 @@ a {
 
 .hudNameBack::after {
   content: '';
-  background-color: #fff;
-  width: 15em;
+  background-color: #EFF1F2;
+  width: 20em;
   height: 6em; 
-  bottom: -1em;
-  right: -1em; 
+  bottom: -0.9em;
+  right: -0.9em; 
   border: solid 2px #9E2896;
   position: absolute;
   z-index: -1; 
 }
 
 .borderPerfil {
-  width: 3em;
-  height: 3em;
+  width: 5em;
+  height: 5em;
+  position: relative;
+  top: 0.75em;
+  left: 1.25em;
   background-color: #fff;
   border: solid 2px #007BC0;
 }
+
+.compoHud {
+  width: 13.5em;
+  height: 6em;
+  position: relative;
+  left: 1.5em;
+}
+
+.nameHud {
+  font-size: 1.3em;
+  margin: 0;
+  font-family: "BoschSans", sans-serif;
+  color: #18837e;
+}
+
+.juncHud {
+  display: flex;
+}
+
+.linhaHudNum {
+  font-size: 0.8em;
+  margin: 0;
+  color: #9E2896;
+  font-family: "BoschSansLight", sans-serif;
+}
+
+.linhaHud {
+  font-size: 0.8em;
+  margin: 0 0.1em 0 0.1em;
+  color: #007BC0;
+  font-family: "BoschSansLight", sans-serif;
+}
+
+
 
 @keyframes scaleImage {
   0% {
