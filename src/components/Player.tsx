@@ -146,11 +146,11 @@ const Player = ({ sceneMeshes }: { sceneMeshes: THREE.Mesh[] }) => {
 
         const moveX = walkDirection.x * velocity * delta;
         const moveZ = walkDirection.z * velocity * delta;
-        
+
         // raycaster.ray.origin.copy(camera.position);
         // raycaster.ray.direction.copy(walkDirection);
         // const intersects = raycaster.intersectObjects(sceneMeshes);
-        
+
         // let adjustedMoveX = moveX;
         // let adjustedMoveZ = moveZ;
 
