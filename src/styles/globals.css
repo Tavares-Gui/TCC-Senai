@@ -366,7 +366,8 @@ a {
   width: 13.5em;
   height: 6em;
   position: relative;
-  left: 1.5em;
+  left: 1.6em;
+  top: 1em;
 }
 
 .nameHud {
@@ -381,20 +382,45 @@ a {
 }
 
 .linhaHudNum {
-  font-size: 0.8em;
+  font-size: 0.9em;
   margin: 0;
   color: #9E2896;
   font-family: "BoschSansLight", sans-serif;
 }
 
 .linhaHud {
-  font-size: 0.8em;
+  font-size: 0.9em;
   margin: 0 0.1em 0 0.1em;
   color: #007BC0;
   font-family: "BoschSansLight", sans-serif;
 }
 
+.agregInfo {
+  margin-top: 0.3em;
+  border: #9E2896 1.9px solid;
+  height: 2.25em;
+}
 
+.ulConfig {
+  list-style-type: none;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+}
+
+.imageInfo {
+  height: 1.2em;
+  width: auto;
+}
+
+.textInfo {
+  color: #18837E;
+  font-size: 0.6em;
+}
 
 @keyframes scaleImage {
   0% {
