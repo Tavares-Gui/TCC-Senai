@@ -6,7 +6,7 @@ import data from "../../public/images/dataInfo.png";
 import duvidas from "../../public/images/duvidasOptions.png";
 import engre from "../../public/images/engreOptions.png";
 import sair from "../../public/images/sairOptions.png";
-import logosFooter from "../../public/images/logosFooter.png";
+import logosFooter from "../../public/images/logosFooter2.png";
 import hudplayerh from "../../public/images/playerHudH.png";
 import hudplayerm from "../../public/images/playerHudM.png";
 
