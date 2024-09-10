@@ -9,6 +9,7 @@ let walkDirection = new THREE.Vector3();
 let rotateAngle = new THREE.Vector3(0, 1, 0);
 let rotateQuaternion = new THREE.Quaternion();
 let cameraTarget = new THREE.Vector3();
+const raycaster = new THREE.Raycaster();
 
 interface DirectionOffsetProps {
   forward: boolean;
@@ -50,9 +51,9 @@ const directionOffset = ({
   return directionOffset;
 };
 
-const Player = () => {
+const Player = ({ sceneMeshes }: { sceneMeshes: THREE.Mesh[] }) => {
   const { forward, backward, left, right, shift } = useInput();
-  const { scene, animations } = useGLTF("./models/COLABORADORM.glb");
+  const { scene, animations } = useGLTF("./models/COLABORADORH.glb");
   const { actions } = useAnimations(animations, scene);
   const rigidBody = useRef<RapierRigidBody>(null);
 
@@ -65,6 +66,14 @@ const Player = () => {
   const currentAction = useRef<string>("idle");
   const controlsRef = useRef<any>(null);
   const camera = useThree((state) => state.camera);
+
+  useEffect(() => {
+    camera.position.set(0, 3, 5);
+
+    if (controlsRef.current) {
+      controlsRef.current.update();
+    }
+  }, [camera]);
 
   useEffect(() => {
     let action = "idle";
@@ -138,6 +147,21 @@ const Player = () => {
         const moveX = walkDirection.x * velocity * delta;
         const moveZ = walkDirection.z * velocity * delta;
 
+        // raycaster.ray.origin.copy(camera.position);
+        // raycaster.ray.direction.copy(walkDirection);
+        // const intersects = raycaster.intersectObjects(sceneMeshes);
+
+        // let adjustedMoveX = moveX;
+        // let adjustedMoveZ = moveZ;
+
+        // if (intersects.length > 0 && intersects[0].distance < 1) {
+        //   const distanceToMove = intersects[0].distance - 0.1;
+        //   const moveFactor = Math.min(distanceToMove / (velocity * delta), 1);
+
+        //   adjustedMoveX = moveX * moveFactor;
+        //   adjustedMoveZ = moveZ * moveFactor;
+        // }
+
         const newPosition = {
           x: position.x + moveX,
           y: position.y,
@@ -153,19 +177,23 @@ const Player = () => {
 
   return (
     <>
-      <OrbitControls ref={controlsRef} enableZoom={true} enablePan={true} />
+      <OrbitControls
+        ref={controlsRef}
+        enableZoom={false}
+        enablePan={true}
+        minDistance={4}
+        maxDistance={4}
+      />
       <RigidBody
         ref={rigidBody}
         colliders={"ball"}
-        linearDamping={12}
+        linearDamping={40}
         lockRotations
       >
-        <primitive object={scene} rotation={[0, Math.PI, 0]} />
+        <primitive object={scene} />
       </RigidBody>
     </>
   );
 };
-
-Player.displayName = "Player";
 
 export default Player;

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import logoBosch from "../../public/images/logo_bosch.png";
-import logoFCM from "../../public/images/FCM.svg";
-import logoGR from "../../public/images/GR.svg";
+import logoFCM from "../../public/images/Fcm.png";
+import logoGR from "../../public/images/GR.png";
 import ButtonX from "../components/ButtonX";
 
 const Overlay: React.FC = () => {

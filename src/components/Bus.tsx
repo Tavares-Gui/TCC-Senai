@@ -1,28 +1,23 @@
 import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { RigidBody } from "@react-three/rapier";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from "three";
 
-interface BusProps {
-  position: [number, number, number];
-}
+const Bus = ({ position, sceneMeshes }: { position: [number, number, number], sceneMeshes: THREE.Mesh[] }) => {
+  const model = useLoader(GLTFLoader, "./models/bus.glb");
 
-const Bus: React.FC<BusProps> = ({ position }) => {
-  const busModel = useLoader(GLTFLoader, "./models/bus.glb");
-
-  busModel.scene.traverse((objeto) => {
+  model.scene.traverse((objeto) => {
     if (objeto instanceof THREE.Mesh) {
       objeto.castShadow = true;
+      sceneMeshes.push(objeto);
     }
   });
 
   return (
-    <RigidBody type="fixed" colliders="hull" position={position}>
-      <primitive object={busModel.scene} />
+    <RigidBody colliders="hull" position={position} type="fixed">
+      <primitive object={model.scene} />
     </RigidBody>
   );
 };
-
-Bus.displayName = "Bus";
 
 export default Bus;

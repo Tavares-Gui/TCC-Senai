@@ -35,8 +35,8 @@ const Betinho = () => {
     <primitive
       object={scene}
       scale={[1, 1, 1]}
-      position={[-3, 0.1, 10.5]}
-      rotation={[0, 125, 0]}
+      position={[4 , 0.1, -10.5]}
+      rotation={[0, Math.PI - 0.7, 0]}
     />
   );
 };

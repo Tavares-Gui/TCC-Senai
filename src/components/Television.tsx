@@ -15,8 +15,8 @@ const Television = () => {
     <primitive
       object={model.scene}
       scale={[0.2, 0.2, 0.2]}
-      position={[-1, 0, 11]}
-      rotation={[0, Math.PI - 25.5 ,0]}
+      position={[3, 0, -11]}
+      rotation={[0,-0.5,0]}
     />
   );
 };

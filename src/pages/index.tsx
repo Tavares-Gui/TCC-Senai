@@ -7,10 +7,13 @@ import Warehouse from "../components/Warehouse";
 import Television from "../components/Television";
 import Betinho from "../components/Betinho";
 import { Physics } from "@react-three/rapier";
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
+import * as THREE from "three";
+import Hud from "../components/Hud";
 
 const Home: React.FC = () => {
-  const conVisible = true;
+  const conVisible = false;
+  const sceneMeshes = useRef<THREE.Mesh[]>([]);
 
   const lightPositions: [number, number, number][] = [
     [15, 5, 14],
@@ -30,10 +33,9 @@ const Home: React.FC = () => {
   ];
 
   const busPositions: [number, number, number][] = [
-    [-5, 0, 14],
-    [10, 0, 14],
-    [20, 0, 14],
-    [30, 0, 14],
+    [5, 0, -14],
+    [10, 0, -14],
+    [-15, 0, -14],
   ];
 
   return (
@@ -45,19 +47,24 @@ const Home: React.FC = () => {
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
         <Suspense>
           <Physics>
-            <Player />
-            <Warehouse />
+            <Player sceneMeshes={sceneMeshes.current} />
+            <Warehouse sceneMeshes={sceneMeshes.current} />
             <Television />
             <Betinho />
             {lightPositions.map((position, index) => (
               <LightBulb key={index} position={position} />
             ))}
             {busPositions.map((position, index) => (
-              <Bus key={index} position={position} />
+              <Bus
+                key={index}
+                position={position}
+                sceneMeshes={sceneMeshes.current}
+              />
             ))}
           </Physics>
         </Suspense>
       </Canvas>
+      <Hud />
     </div>
   );
 };

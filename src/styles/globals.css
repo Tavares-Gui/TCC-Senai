@@ -6,6 +6,13 @@
 }
 
 @font-face {
+  font-family: "BoschSansLight";
+  src: url("/fonts/BoschSans-Light.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "SpecialAlphabet";
   src: url("/fonts/specialalphabetsp04.otf") format("opentype");
   font-weight: normal;
@@ -301,19 +308,254 @@ a {
   animation-duration: 15s;
   animation-iteration-count: infinite;
   clip-path: polygon(4% 0, 100% 0%, 100% 99%, 0% 100%);
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  overflow: hidden; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   animation-timing-function: ease-in-out;
   animation-delay: 0s;
 }
 
 .imageBack {
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   object-position: center;
+}
+
+.hud {
+  position: absolute;
+  top: 0.1em;
+}
+
+.hudNameBack {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  width: 21em;
+  height: 6em;
+  margin: 1em 0 0 1em;
+  border: solid 2px #9e2896;
+  position: relative;
+  z-index: 1;
+}
+
+.hudNameBack::after {
+  content: "";
+  background-color: #eff1f2;
+  width: 21em;
+  height: 6em;
+  bottom: -0.9em;
+  right: -0.9em;
+  border: solid 2px #18837e;
+  position: absolute;
+  z-index: -1;
+}
+
+.borderPerfil {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 5em;
+  height: 5.1em;
+  position: relative;
+  top: 0.75em;
+  left: 1.25em;
+  background-color: #fff;
+  border: solid 2px #007bc0;
+}
+
+.hudPlayer {
+  height: 4.9em;
+  width: auto;
+  transform: scaleX(-1);
+}
+
+.compoHud {
+  width: 13.5em;
+  height: 6em;
+  position: relative;
+  left: 1.6em;
+  top: 1em;
+}
+
+.nameHud {
+  font-size: 1.3em;
+  margin: 0;
+  font-family: "BoschSans", sans-serif;
+  color: #18837e;
+}
+
+.juncHud {
+  display: flex;
+}
+
+.linhaHudNum {
+  font-size: 0.9em;
+  margin: 0;
+  color: #9e2896;
+  font-family: "BoschSansLight", sans-serif;
+}
+
+.linhaHud {
+  font-size: 0.9em;
+  margin: 0 0.1em 0 0.1em;
+  color: #007bc0;
+  font-family: "BoschSansLight", sans-serif;
+}
+
+.agregInfo {
+  width: 14.3rem;
+  background-color: #fff;
+  margin-top: 0.3em;
+  border: #9e2896 1.9px solid;
+  height: 2.25em;
+}
+
+.ulConfig {
+  list-style-type: none;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+}
+
+.imageInfo {
+  height: 1.2em;
+  width: auto;
+}
+
+.textInfo {
+  color: #18837e;
+  font-size: 0.6em;
+}
+
+.hudOptions {
+  position: absolute;
+  top: 0.1em;
+  right: 0.1em;
+}
+
+.hudNameBackOptions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  width: 14em;
+  height: 4em;
+  margin: 1em 1em 0 0;
+  border: solid 2px #9e2896;
+  position: relative;
+  z-index: 1;
+}
+
+.hudNameBackOptions::after {
+  content: "";
+  background-color: #eff1f2;
+  width: 14em;
+  height: 4em;
+  top: 0.5em;
+  right: 0.5em;
+  border: solid 2px #18837e;
+  position: absolute;
+  z-index: -1;
+}
+
+.ulConfigOptions {
+  list-style-type: none;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 1.6em 1em 0 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+}
+
+.imageInfoOptions {
+  height: 1.9em;
+  width: auto;
+}
+
+.footer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  bottom: 0.01em;
+  width: 100%;
+}
+
+.firstFooterWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 0.7em;
+  position: relative;
+  z-index: 0;
+}
+
+.firstFooterBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #18837e;
+  clip-path: polygon(1% 0, 99% 0, 100% 100%, 0% 100%);
+  z-index: 0;
+}
+
+.firstFooter {
+  width: 99.3%;
+  border-top: #18837e 3px solid;
+  background-color: #fff;
+  clip-path: polygon(1% 0, 99% 0, 100% 100%, 0% 100%);
+  z-index: 1; 
+}
+
+.secondFooterWrapper {
+  width: 25%;
+  height: 1em;
+  position: relative;
+  top: 0.25em;
+  display: flex;
+  justify-content: center;
+  z-index: 3;
+}
+
+.secondFooterBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 99%;
+  background-color: #18837e;
+  clip-path: polygon(2.4% 0, 97.6% 0, 100% 100%, 0% 100%);
+  z-index: 2;
+}
+
+.secondFooter {
+  width: 98.3%;
+  border-top: #18837e 3px solid;
+  background-color: #fff;
+  height: 100%;
+  clip-path: polygon(2.4% 0, 97.6% 0, 100% 100%, 0% 100%);
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+}
+
+.imagensFooter {
+  position: relative;
+  top: 0.25em;
+  height: 0.77em;
+  width: auto;
+  z-index: 3;
 }
 
 @keyframes scaleImage {
