@@ -333,6 +333,14 @@ a {
   width: 35rem;
 }
 
+.hrLoading {
+  width: 12em;
+  border: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(158,40,150,1) 0%, rgba(0,123,192,1) 50%, rgba(26,156,59,1) 100%);
+  margin-Top: 1rem;
+}
+
 .pipeLineLoading {
   font-Size: 1em;
   margin-Left: 0.5rem;
@@ -345,29 +353,69 @@ a {
   height: 2rem;
 }
 
+.loader {
+  width: 40px;
+  margin-top: 20px;
+  aspect-ratio: 2;
+  --_i: no-repeat radial-gradient(circle closest-side,#9e2896 90%,#0000);
+  --_s: no-repeat radial-gradient(circle closest-side,#007bc0 90%,#0000);
+  --_a: no-repeat radial-gradient(circle closest-side,#1a9c3b 90%,#0000);
+  background: 
+    var(--_i) 0%   50%,
+    var(--_s) 50%  50%,
+    var(--_a) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+    20%{background-position:0%   0%, 50%  50%,100%  50%}
+    40%{background-position:0% 100%, 50%   0%,100%  50%}
+    60%{background-position:0%  50%, 50% 100%,100%   0%}
+    80%{background-position:0%  50%, 50%  50%,100% 100%}
+}
+
+@keyframes moveBusInCircle {
+  0% {
+    transform: rotate(0deg) translate(6rem) rotate(0deg); /* Começa na parte de cima, apontando para a direita */
+  }
+  25% {
+    transform: rotate(90deg) translate(6rem) rotate(-90deg); /* Movendo para a direita, girando para baixo */
+  }
+  50% {
+    transform: rotate(180deg) translate(6rem) rotate(-180deg); /* Movendo para baixo, girando para a esquerda */
+  }
+  75% {
+    transform: rotate(270deg) translate(6rem) rotate(-270deg); /* Movendo para a esquerda, girando para cima */
+  }
+  100% {
+    transform: rotate(360deg) translate(6rem) rotate(-360deg); /* Retorna à posição inicial */
+  }
+}
+
 .busContainer {
-  width: 100%;
-  height: 3rem;
   position: relative;
-  overflow: hidden;
+  width: 12rem;
+  height: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.logoBoschLoader {
+  width: 5rem;
+  height: 5rem;
+  position: absolute;
 }
 
 .busAnimation {
   position: absolute;
-  bottom: 0;
-  left: -100px;
-  width: 3rem;
-  height: 3rem;
-  animation: moveBus 5s linear infinite;
-}
-
-@keyframes moveBus {
-  0% {
-    left: -100px;
-  }
-  100% {
-    left: 100%;
-  }
+  width: 4rem;
+  height: 2rem;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  animation: moveBusInCircle 5s linear infinite;
 }
 
 @keyframes scaleImage {

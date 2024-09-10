@@ -17,7 +17,7 @@ const LoadingPage = () => {
           <h2 style={{ fontSize: '1.25rem', fontWeight: '600', marginTop: '1rem' }}>
             Aqui estará escrito alguma informacao aleatória sobre o nosso sistema
           </h2>
-          <hr style={{ width: '12em', border: '1px solid black', marginTop: '1rem' }} />
+          <hr className="hrLoading" />
         </div>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: '1rem' }}>
           <Image src={logoBosch} alt="Logo Bosch" className="logosLoading"/>
@@ -26,11 +26,15 @@ const LoadingPage = () => {
           <h1 className="pipeLineLoading" style={{ color: '#18837e' }}>|</h1>
           <Image src={logoGR} alt="Logo GR" className="logosLoading"/>
         </div>
-      </div>
-
+        
+        <div className="loader"></div>
       <div className="busContainer">
         <Image src={bus} alt="Ônibus em movimento" className="busAnimation" />
+        <Image src={logoBosch} alt="Logo Bosch" className="logoBoschLoader" />
       </div>
+      </div>
+
+
     </div>
   );
 };
