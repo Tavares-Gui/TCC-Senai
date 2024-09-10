@@ -1,3 +1,5 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import { Canvas } from "@react-three/fiber";
 import { Stats, Sky } from "@react-three/drei";
 import LightBulb from "../components/LightBulb";
@@ -65,6 +67,8 @@ const Home: React.FC = () => {
         </Suspense>
       </Canvas>
       <Hud />
+      <SpeedInsights />
+      <Analytics />
     </div>
   );
 };
