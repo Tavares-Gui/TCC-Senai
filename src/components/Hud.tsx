@@ -6,16 +6,18 @@ import data from "../../public/images/dataInfo.png";
 import duvidas from "../../public/images/duvidasOptions.png";
 import engre from "../../public/images/engreOptions.png";
 import sair from "../../public/images/sairOptions.png";
-import bosch from "../../public/images/bosch.png";
-import fcm from "../../public/images/Fcm.png";
-import gr from "../../public/images/GR.png";
+import logosFooter from "../../public/images/logosFooter.png";
+import hudplayerh from "../../public/images/playerHudH.png";
+import hudplayerm from "../../public/images/playerHudM.png";
 
 const Hud = () => {
   return (
     <div>
       <div className="hud">
         <div className="hudNameBack">
-          <div className="borderPerfil"></div>
+          <div className="borderPerfil">
+            <Image src={hudplayerh} alt="Hud Player" className="hudPlayer"></Image>
+          </div>
           <div>
             <div className="compoHud">
               <h1 className="nameHud">MATEUS LEITE</h1>
@@ -69,15 +71,16 @@ const Hud = () => {
         </div>
       </div>
       <div className="footer">
-        <div className="secondFooter">
-          <Image src={bosch} alt="Logo Bosch" className="imagensFooter"></Image>
-          <div style={{display: 'flex', alignItems: 'center', gap: 6}}>
-            <Image src={fcm} alt="Logo Bosch" className="imagensFooter"></Image>
-            <h1 className="textFooter">GR/FCM</h1>
-            <Image src={gr} alt="Logo Bosch" className="imagensFooter"></Image>
+        <div className="secondFooterWrapper">
+          <div className="secondFooterBorder"></div>
+          <div className="secondFooter">
+            <Image src={logosFooter} alt="Logo Bosch" className="imagensFooter"></Image>
           </div>
         </div>
-        <div className="firstFooter"></div>
+        <div className="firstFooterWrapper">
+          <div className="firstFooterBorder"></div>
+          <div className="firstFooter"></div>
+        </div>
       </div>
     </div>
   );

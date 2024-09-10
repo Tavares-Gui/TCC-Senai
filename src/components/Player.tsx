@@ -181,8 +181,8 @@ const Player = ({ sceneMeshes }: { sceneMeshes: THREE.Mesh[] }) => {
         ref={controlsRef}
         enableZoom={false}
         enablePan={true}
-        minDistance={5}
-        maxDistance={5}
+        minDistance={4}
+        maxDistance={4}
       />
       <RigidBody
         ref={rigidBody}
