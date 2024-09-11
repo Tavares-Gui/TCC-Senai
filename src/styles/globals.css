@@ -374,26 +374,45 @@ a {
     80%{background-position:0%  50%, 50%  50%,100% 100%}
 }
 
-.busContainer {
+/* .busContainer {
   width: 100%;
   height: 4rem;
   position: absolute;
   bottom: 5.5rem;
   left: 0;
   overflow: hidden;
-}
+} */
 
+.busContainer {
+  width: 100%;
+  height: 4rem; /* Ajuste a altura conforme necessário */
+  position: relative;
+  overflow: hidden;
+}
 
 .busAnimation {
   position: absolute;
   bottom: 0;
   left: -100px;
+  z-index: 2; /* Coloca o ônibus acima da imagem da rua */
   animation: moveBus 5s linear infinite, bounceBus 0.5s ease-in-out infinite;
 }
 
 .busImage {
   width: 4rem;
   height: 4rem;
+}
+
+.roadImage {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Faz com que a imagem da rua ocupe toda a largura do container */
+  height: 100%; /* Faz com que a imagem da rua ocupe toda a altura do container */
+  background-image: url('/images/Road.png'); /* Caminho da imagem pequena da rua */
+  background-repeat: repeat-x; /* Faz com que a imagem se repita horizontalmente */
+  background-size: 100px 100%; /* Ajuste o tamanho da imagem conforme necessário */
+  z-index: 1; /* Coloca a imagem da rua atrás do ônibus */
 }
 
 .smokeContainer {
@@ -417,6 +436,7 @@ a {
 .smoke:nth-child(2) {
   animation-delay: 0.3s;
 }
+
 .smoke:nth-child(3) {
   animation-delay: 0.6s;
 }

@@ -4,6 +4,7 @@ import logoBosch from "../../public/images/logo_bosch.png";
 import logoFCM from "../../public/images/FCM.svg";
 import logoGR from "../../public/images/GR.svg";
 import lamp from "../../public/images/Lamp.png";
+import road from "../../public/images/Road.png";
 import bus from "../../public/images/Bus.png";
 
 const messages = [
@@ -53,6 +54,7 @@ const LoadingPage = () => {
         <div className="loader"></div>
 
         <div className="busContainer">
+          <Image src={road} alt="Rua para o ônibus" className="roadImage" />
           <div className="busAnimation">
             <div className="smokeContainer">
               <div className="smoke"></div>
