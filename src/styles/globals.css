@@ -365,7 +365,7 @@ a {
     var(--_s) 50%  50%,
     var(--_a) 100% 50%;
   background-size: calc(100%/3) 50%;
-  animation: l3 1s infinite linear;
+  animation: l3 1.1s infinite linear;
 }
 @keyframes l3 {
     20%{background-position:0%   0%, 50%  50%,100%  50%}
