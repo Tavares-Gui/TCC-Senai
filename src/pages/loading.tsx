@@ -10,7 +10,7 @@ const LoadingPage = () => {
   return (
     <div>
       <div className="colorTop"></div>
-      
+
       <div className="divLoading">
         <div className="divDescLoading">
           <Image src={lamp} alt="Lâmpada de ideia" style={{ width: '3.6rem', height: '4rem' }} />
@@ -20,21 +20,26 @@ const LoadingPage = () => {
           <hr className="hrLoading" />
         </div>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: '1rem' }}>
-          <Image src={logoBosch} alt="Logo Bosch" className="logosLoading"/>
+          <Image src={logoBosch} alt="Logo Bosch" className="logosLoading" />
           <h1 className="pipeLineLoading" style={{ color: '#007bc0' }}>|</h1>
-          <Image src={logoFCM} alt="Logo FCM" className="logosLoading"/>
+          <Image src={logoFCM} alt="Logo FCM" className="logosLoading" />
           <h1 className="pipeLineLoading" style={{ color: '#18837e' }}>|</h1>
-          <Image src={logoGR} alt="Logo GR" className="logosLoading"/>
+          <Image src={logoGR} alt="Logo GR" className="logosLoading" />
         </div>
-        
+
         <div className="loader"></div>
-      <div className="busContainer">
-        <Image src={bus} alt="Ônibus em movimento" className="busAnimation" />
-        <Image src={logoBosch} alt="Logo Bosch" className="logoBoschLoader" />
-      </div>
-      </div>
 
-
+        <div className="busContainer">
+          <div className="busAnimation">
+            <div className="smokeContainer">
+              <div className="smoke"></div>
+              <div className="smoke"></div>
+              <div className="smoke"></div>
+            </div>
+            <Image src={bus} alt="Ônibus em movimento" className="busImage" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

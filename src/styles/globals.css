@@ -374,48 +374,77 @@ a {
     80%{background-position:0%  50%, 50%  50%,100% 100%}
 }
 
-@keyframes moveBusInCircle {
-  0% {
-    transform: rotate(0deg) translate(6rem) rotate(0deg); /* Começa na parte de cima, apontando para a direita */
-  }
-  25% {
-    transform: rotate(90deg) translate(6rem) rotate(-90deg); /* Movendo para a direita, girando para baixo */
-  }
-  50% {
-    transform: rotate(180deg) translate(6rem) rotate(-180deg); /* Movendo para baixo, girando para a esquerda */
-  }
-  75% {
-    transform: rotate(270deg) translate(6rem) rotate(-270deg); /* Movendo para a esquerda, girando para cima */
-  }
-  100% {
-    transform: rotate(360deg) translate(6rem) rotate(-360deg); /* Retorna à posição inicial */
-  }
-}
-
 .busContainer {
+  width: 100%;
+  height: 4rem;
   position: relative;
-  width: 12rem;
-  height: 12rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.logoBoschLoader {
-  width: 5rem;
-  height: 5rem;
-  position: absolute;
+  overflow: hidden;
 }
 
 .busAnimation {
   position: absolute;
+  bottom: 0;
+  left: -100px;
+  animation: moveBus 5s linear infinite, bounceBus 0.5s ease-in-out infinite;
+}
+
+.busImage {
   width: 4rem;
-  height: 2rem;
-  top: 50%;
-  left: 50%;
-  transform-origin: center center;
-  animation: moveBusInCircle 5s linear infinite;
+  height: 4rem;
+}
+
+.smokeContainer {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 0.5rem;
+  pointer-events: none;
+}
+
+.smoke {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: rgba(128, 128, 128, 0.7);
+  border-radius: 50%;
+  animation: smoke 2s linear infinite;
+}
+
+.smoke:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.smoke:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes moveBus {
+  0% {
+    left: -100px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes bounceBus {
+  0%, 100% {
+    bottom: 0px;
+  }
+  50% {
+    bottom: 5px;
+  }
+}
+
+@keyframes smoke {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-30px, -20px) scale(1.5);
+    opacity: 0;
+  }
 }
 
 @keyframes scaleImage {
