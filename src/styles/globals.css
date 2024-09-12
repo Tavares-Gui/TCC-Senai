@@ -559,6 +559,12 @@ a {
   z-index: 3;
 }
 
+.modal {
+  width: 50%;
+  height: 50%;
+  background-color: #fff;
+}
+
 @keyframes scaleImage {
   0% {
     transform: scaleX(1);

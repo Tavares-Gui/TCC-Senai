@@ -1,11 +1,16 @@
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import logoBosch from "../../public/images/logo_bosch.png";
 import logoFCM from "../../public/images/Fcm.png";
 import logoGR from "../../public/images/GR.png";
 import ButtonX from "../components/ButtonX";
+import ModalStart from "../components/ModalStart";
 
 const Overlay: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const controlModal = () => setIsModalOpen(!isModalOpen)
+
   useEffect(() => {
     const rotateRandomly = () => {
       document
@@ -44,9 +49,9 @@ const Overlay: React.FC = () => {
           <h1 className="fontX">O</h1>
         </div>
         <div className="botoes">
-          <ButtonX>INICIAR</ButtonX>
-          <ButtonX styleType="buttonFec">TUTORIAL</ButtonX>
-          <ButtonX styleType="buttonVazVerde">SOBRE</ButtonX>
+          <ButtonX onClick={controlModal}>INICIAR</ButtonX>
+          <ButtonX onClick={controlModal}styleType="buttonFec">TUTORIAL</ButtonX>
+          <ButtonX onClick={controlModal}styleType="buttonVazVerde">SOBRE</ButtonX>
         </div>
         <div className="footerLogo">
           <Image src={logoBosch} alt="Logo Bosch" className="boschImage" />
@@ -56,6 +61,7 @@ const Overlay: React.FC = () => {
           <Image src={logoGR} alt="Logo GR" className="boschImage" />
         </div>
       </div>
+      <ModalStart isOpen={isModalOpen} onClose={controlModal} />
     </>
   );
 };
