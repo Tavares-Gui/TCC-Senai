@@ -42,7 +42,9 @@ const ModalStart: React.FC<ModalStartProps> = ({ isOpen, onClose }) => {
               position: "absolute",
               right: "0.5em",
               top: "0.48em",
+              cursor: "pointer"
             }}
+            onClick={onClose}
           ></Image>
         </div>
         <div

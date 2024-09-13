@@ -629,6 +629,7 @@ a {
   background-color: #007BC0;
   border: none;
   color: #fff;
+  cursor: pointer;
 }
 
 @keyframes scaleImage {
