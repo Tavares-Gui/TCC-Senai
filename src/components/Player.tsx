@@ -53,7 +53,7 @@ const directionOffset = ({
 
 const Player = ({ sceneMeshes }: { sceneMeshes: THREE.Mesh[] }) => {
   const { forward, backward, left, right, shift } = useInput();
-  const { scene, animations } = useGLTF("./models/COLABORADORH.glb");
+  const { scene, animations } = useGLTF("./models/COLABORADORM.glb");
   const { actions } = useAnimations(animations, scene);
   const rigidBody = useRef<RapierRigidBody>(null);
 
@@ -179,10 +179,10 @@ const Player = ({ sceneMeshes }: { sceneMeshes: THREE.Mesh[] }) => {
     <>
       <OrbitControls
         ref={controlsRef}
-        enableZoom={false}
+        enableZoom={true}
         enablePan={true}
-        minDistance={4}
-        maxDistance={4}
+        minDistance={0}
+        maxDistance={50}
       />
       <RigidBody
         ref={rigidBody}

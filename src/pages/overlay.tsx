@@ -34,6 +34,7 @@ const Overlay: React.FC = () => {
 
   return (
     <>
+      {isModalOpen && <div className="backBlur"></div>}
       <div className="colorTop" />
       <div className="corpo">
         <h1 className="bemvindo">BEM-VINDO AO</h1>
