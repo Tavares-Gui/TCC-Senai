@@ -54,7 +54,7 @@ const LoadingPage = () => {
         <div className="loader"></div>
 
         <div className="busContainer">
-          <Image src={road} alt="Rua para o ônibus" className="roadImage" />
+          <hr className="roadLine" />
           <div className="busAnimation">
             <div className="smokeContainer">
               <div className="smoke"></div>
