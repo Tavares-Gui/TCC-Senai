@@ -12,7 +12,6 @@ import { Physics } from "@react-three/rapier";
 import { Suspense, useRef } from "react";
 import * as THREE from "three";
 import Hud from "../components/Hud";
-import Background from "../components/BackGround";
 
 const Home: React.FC = () => {
   const conVisible = false;
@@ -48,7 +47,6 @@ const Home: React.FC = () => {
         {conVisible && <axesHelper args={[2]} />}
         <ambientLight intensity={1} />
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
-        <Background />
         <Suspense>
           <Physics>
             <Player sceneMeshes={sceneMeshes.current} />
