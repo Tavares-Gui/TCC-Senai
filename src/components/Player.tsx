@@ -179,10 +179,10 @@ const Player = ({ sceneMeshes }: { sceneMeshes: THREE.Mesh[] }) => {
     <>
       <OrbitControls
         ref={controlsRef}
-        enableZoom={true}
+        enableZoom={false}
         enablePan={true}
-        minDistance={0}
-        maxDistance={50}
+        minDistance={4}
+        maxDistance={4}
       />
       <RigidBody
         ref={rigidBody}
