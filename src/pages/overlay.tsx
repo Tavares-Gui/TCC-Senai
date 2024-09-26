@@ -55,11 +55,15 @@ const Overlay: React.FC = () => {
           <ButtonX onClick={controlModal}styleType="buttonVazVerde">SOBRE</ButtonX>
         </div>
         <div className="footerLogo">
-          <Image src={logoBosch} alt="Logo Bosch" className="boschImage" />
-          <h1 style={{fontSize: '1em', color: '#007bc0', marginLeft: 3, marginRight: 4}}>|</h1>
-          <Image src={logoFCM} alt="Logo FCM" className="boschImage" />
-          <h1 style={{fontSize: '1em', color: '#18837e', marginLeft: 3, marginRight: 4}}>|</h1>
-          <Image src={logoGR} alt="Logo GR" className="boschImage" />
+          <div className="radiusBosch">
+            <Image src={logoBosch} alt="Logo Bosch" className="boschImage" />
+          </div>
+          <div className="radiusFCM">
+            <Image src={logoFCM} alt="Logo FCM" className="boschImage" />
+          </div>
+          <div className="radiusGR">
+            <Image src={logoGR} alt="Logo GR" className="boschImage" />
+          </div>
         </div>
       </div>
       <ModalStart isOpen={isModalOpen} onClose={controlModal} />

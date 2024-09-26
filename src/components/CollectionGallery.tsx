@@ -4,7 +4,7 @@ interface ImageItem {
   src: string;
   alt: string;
   top?: string;
-  width: number; 
+  width: number;
   height: number;
 }
 
@@ -14,6 +14,8 @@ const images: ImageItem[] = [
   { src: "/images/Bosch3.png", alt: "Bosch3", top: '18rem', width: 500, height: 300 },
   { src: "/images/Bosch4.png", alt: "Bosch4", top: '27rem', width: 500, height: 300 }
 ];
+
+const animationDelays = ['-4s', '-8.5s', '-14s', '-1s'];
 
 const CollectionGallery: React.FC = () => {
   return (
@@ -26,7 +28,7 @@ const CollectionGallery: React.FC = () => {
           top={image.top} 
           width={image.width} 
           height={image.height}
-          animationDelay={`${index * 3}s`}
+          animationDelay={animationDelays[index]} 
         />
       ))}
     </div>
@@ -34,4 +36,3 @@ const CollectionGallery: React.FC = () => {
 };
 
 export default CollectionGallery;
-
