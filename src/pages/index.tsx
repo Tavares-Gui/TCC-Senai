@@ -1,7 +1,6 @@
 import { Canvas } from "@react-three/fiber";
-import { Stats, Sky } from "@react-three/drei";
+import { Sky } from "@react-three/drei";
 import LightBulb from "../components/LightBulb";
-import Bus from "../components/Bus";
 import Player from "../components/Player";
 import Warehouse from "../components/Warehouse";
 import Television from "../components/Television";
@@ -10,7 +9,6 @@ import { Physics } from "@react-three/rapier";
 import { Suspense, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import Hud from "../components/Hud";
-import Background from "../components/BackGround";
 import Conversation from "../components/Conversation";
 import LoadingPage from "../components/Loading";
 
@@ -36,12 +34,6 @@ const Home: React.FC = () => {
     [-11, 5, -23],
   ];
 
-  const busPositions: [number, number, number][] = [
-    [5, 0, -14],
-    [10, 0, -14],
-    [-15, 0, -14],
-  ];
-
   const handleOpenConversation = () => {
     setIsConversationOpen(true);
   };
@@ -63,7 +55,6 @@ const Home: React.FC = () => {
       <Canvas shadows>
         <ambientLight intensity={1} />
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
-        {/* <Background /> */}
         <Suspense fallback={null}>
           <Physics>
             <Player sceneMeshes={sceneMeshes.current} />
@@ -73,13 +64,6 @@ const Home: React.FC = () => {
             {lightPositions.map((position, index) => (
               <LightBulb key={index} position={position} />
             ))}
-            {/* {busPositions.map((position, index) => (
-              <Bus
-                key={index}
-                position={position}
-                sceneMeshes={sceneMeshes.current}
-              />
-            ))} */}
           </Physics>
         </Suspense>
       </Canvas>
