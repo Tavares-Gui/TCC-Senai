@@ -53,7 +53,7 @@ const directionOffset = ({
 
 const Player = ({ sceneMeshes }: { sceneMeshes: THREE.Mesh[] }) => {
   const { forward, backward, left, right, shift } = useInput();
-  const { scene, animations } = useGLTF("./models/COLABORADORM.glb");
+  const { scene, animations } = useGLTF("./models/COLABORADORH.glb");
   const { actions } = useAnimations(animations, scene);
   const rigidBody = useRef<RapierRigidBody>(null);
 
