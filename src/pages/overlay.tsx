@@ -5,11 +5,14 @@ import logoFCM from "../../public/images/Fcm.png";
 import logoGR from "../../public/images/GR.png";
 import ButtonX from "../components/ButtonX";
 import ModalStart from "../components/ModalStart";
+import ModalTutorial from "../components/ModalTutorial";
 
 const Overlay: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+  const [isStartOpen, setIsStartOpen] = useState(false);
 
-  const controlModal = () => setIsModalOpen(!isModalOpen)
+  const toggleTutorialModal = () => setIsTutorialOpen(!isTutorialOpen);
+  const toggleStartModal = () => setIsStartOpen(!isStartOpen);
 
   useEffect(() => {
     const rotateRandomly = () => {
@@ -34,7 +37,7 @@ const Overlay: React.FC = () => {
 
   return (
     <>
-      {isModalOpen && <div className="backBlur"></div>}
+      {(isTutorialOpen || isStartOpen) && <div className="backBlur"></div>}
       <div className="colorTop" />
       <div className="corpo">
         <h1 className="bemvindo">BEM-VINDO AO</h1>
@@ -50,9 +53,9 @@ const Overlay: React.FC = () => {
           <h1 className="fontX">O</h1>
         </div>
         <div className="botoes">
-          <ButtonX onClick={controlModal}>INICIAR</ButtonX>
-          <ButtonX onClick={controlModal}styleType="buttonFec">TUTORIAL</ButtonX>
-          <ButtonX onClick={controlModal}styleType="buttonVazVerde">SOBRE</ButtonX>
+          <ButtonX onClick={toggleStartModal}>INICIAR</ButtonX>
+          <ButtonX onClick={toggleTutorialModal} styleType="buttonFec">TUTORIAL</ButtonX>
+          <ButtonX onClick={toggleStartModal} styleType="buttonVazVerde">SOBRE</ButtonX>
         </div>
         <div className="footerLogo">
           <div className="radiusBosch">
@@ -66,7 +69,8 @@ const Overlay: React.FC = () => {
           </div>
         </div>
       </div>
-      <ModalStart isOpen={isModalOpen} onClose={controlModal} />
+      <ModalTutorial isOpen={isTutorialOpen} onClose={toggleTutorialModal} />
+      <ModalStart isOpen={isStartOpen} onClose={toggleStartModal} />
     </>
   );
 };

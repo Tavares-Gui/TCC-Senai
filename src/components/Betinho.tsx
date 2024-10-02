@@ -2,7 +2,11 @@ import * as THREE from "three";
 import { useEffect, useRef } from "react";
 import { useAnimations, useGLTF } from "@react-three/drei";
 
-const Betinho = () => {
+interface BetinhoProps {
+  onClick: () => void;
+}
+
+const Betinho: React.FC<BetinhoProps> = ({ onClick }) => {
   const { scene, animations } = useGLTF("./models/BETINHO.glb");
   const { actions } = useAnimations(animations, scene);
 
@@ -35,8 +39,9 @@ const Betinho = () => {
     <primitive
       object={scene}
       scale={[1, 1, 1]}
-      position={[4 , 0.1, -10.5]}
+      position={[4, 0.1, -10.5]}
       rotation={[0, Math.PI - 0.7, 0]}
+      onClick={onClick}
     />
   );
 };

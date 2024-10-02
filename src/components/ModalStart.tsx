@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from 'next/router';
 import axios from "axios";
 import Image from "next/image";
 import close from "../../public/images/close.png";
@@ -16,6 +17,7 @@ const ModalStart: React.FC<ModalStartProps> = ({ isOpen, onClose }) => {
   const [selectedCharacter, setSelectedCharacter] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const router = useRouter(); 
 
   if (!isOpen) return null;
 
@@ -29,6 +31,7 @@ const ModalStart: React.FC<ModalStartProps> = ({ isOpen, onClose }) => {
       });
       console.log("Login successful:", response.data);
       setSuccessMessage("Login successful");
+      router.push("/");
       onClose();
     } catch (error) {
       console.error("Login error:", error);
@@ -66,7 +69,7 @@ const ModalStart: React.FC<ModalStartProps> = ({ isOpen, onClose }) => {
               cursor: "pointer"
             }}
             onClick={handleClean}
-          ></Image>
+          />
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <input
@@ -86,14 +89,12 @@ const ModalStart: React.FC<ModalStartProps> = ({ isOpen, onClose }) => {
             className="inputBosch"
           />
         </div>
-
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-        {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {errorMessage && <p style={{ color: 'black' }}>{errorMessage}</p>}
+          {successMessage && <p style={{ color: 'black' }}>{successMessage}</p>}
+        </div>
         <div style={{ display: "flex", justifyContent: "center", margin: '0.3em 0 0.8em 0' }}>
-          <h1 style={{ color: "#18837e", fontSize: "0.5em", marginRight: "0.2em" }}>
-            ESCOLHA SEU
-          </h1>
+          <h1 style={{ color: "#18837e", fontSize: "0.5em", marginRight: "0.2em" }}>ESCOLHA SEU</h1>
           <h1 style={{ color: "#9e2896", fontSize: "0.5em" }}>PERSONAGEM</h1>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0.2em' }}>

@@ -7,14 +7,17 @@ import Warehouse from "../components/Warehouse";
 import Television from "../components/Television";
 import Betinho from "../components/Betinho";
 import { Physics } from "@react-three/rapier";
-import { Suspense, useRef } from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import Hud from "../components/Hud";
 import Background from "../components/BackGround";
+import Conversation from "../components/Conversation";
+import LoadingPage from "../components/Loading";
 
 const Home: React.FC = () => {
-  const conVisible = false;
+  const [isConversationOpen, setIsConversationOpen] = useState(false);
   const sceneMeshes = useRef<THREE.Mesh[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const lightPositions: [number, number, number][] = [
     [15, 5, 14],
@@ -39,34 +42,64 @@ const Home: React.FC = () => {
     [-15, 0, -14],
   ];
 
+  const handleOpenConversation = () => {
+    setIsConversationOpen(true);
+  };
+
+  const handleCloseConversation = () => {
+    setIsConversationOpen(false);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 15000);
+
+    return () => clearTimeout(timer); 
+  }, []);
+
   return (
-    <div className="container">
+    <div className="container" style={{ backgroundColor: 'white' }}>
       <Canvas shadows>
-        {conVisible && <Stats />}
-        {conVisible && <axesHelper args={[2]} />}
         <ambientLight intensity={1} />
         <Sky distance={450000} sunPosition={[0, 1, 0]} inclination={0} />
-        <Background />
-        <Suspense>
+        {/* <Background /> */}
+        <Suspense fallback={null}>
           <Physics>
             <Player sceneMeshes={sceneMeshes.current} />
             <Warehouse sceneMeshes={sceneMeshes.current} />
             <Television />
-            <Betinho />
+            <Betinho onClick={handleOpenConversation} />
             {lightPositions.map((position, index) => (
               <LightBulb key={index} position={position} />
             ))}
-            {busPositions.map((position, index) => (
+            {/* {busPositions.map((position, index) => (
               <Bus
                 key={index}
                 position={position}
                 sceneMeshes={sceneMeshes.current}
               />
-            ))}
+            ))} */}
           </Physics>
         </Suspense>
       </Canvas>
+      <Conversation isOpen={isConversationOpen} onClose={handleCloseConversation} />
       <Hud />
+      {!isLoaded && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            zIndex: 10,
+          }}
+        >
+          <LoadingPage />
+        </div>
+      )}
     </div>
   );
 };
